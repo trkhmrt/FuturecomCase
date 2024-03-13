@@ -26,9 +26,10 @@ const AddUser=()=>{
         
         try {
           const response = await axios.post("https://localhost:7069/User/AddUser",user);
-          console.log(response.data);
+          alert('Kullanıcı Eklendi')
         } catch (error) {
           console.error(error.message); 
+          alert("HATA")
         }
       };
 

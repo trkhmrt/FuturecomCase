@@ -7,10 +7,10 @@ const NormalUserInfo = ({ user }) => {
     const [id, setId] = useState(user.id);
 
     useEffect(() => {
-        setPhone(user.phoneNumber); // user nesnesinden gelen telefon değeriyle state'i güncelle
-        setEmail(user.email); // user nesnesinden gelen email değeriyle state'i güncelle
-        setId(user.id); // user nesnesinden gelen id değeriyle state'i güncelle
-    }, [user]); // user nesnesi değiştiğinde useEffect'in çalışmasını sağla
+        setPhone(user.phoneNumber); 
+        setEmail(user.email); 
+        setId(user.id); 
+    }, [user]);
 
     const updateUser = async () => {
         const userToUpdate = {
@@ -20,9 +20,9 @@ const NormalUserInfo = ({ user }) => {
         };
         try {
             const response = await axios.post("https://localhost:7069/User/update", userToUpdate);
-            console.log(response.data); 
+            alert("Güncellendi")
         } catch (error) {
-            console.error(error.message); 
+            alert("HATA")
         }
     };
 

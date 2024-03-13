@@ -16,8 +16,9 @@ const NormalUserInfo = ({ user }) => {
         try {
             const response = await axios.post("https://localhost:7069/User/update", userToUpdate);
             console.log(response.data); 
+            alert("Güncellendi")
         } catch (error) {
-            console.error(error.message); 
+            alert("HATA")
         }
     };
 

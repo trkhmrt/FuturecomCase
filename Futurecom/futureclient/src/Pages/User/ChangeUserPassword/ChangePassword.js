@@ -44,7 +44,7 @@ const PasswordValidator = () => {
             });
             
             if (response.data === 'Password changed successfully') {
-              
+              alert('Şifre değiştirildi') 
             } else {
               setErrorMessage(response.data);
             }
