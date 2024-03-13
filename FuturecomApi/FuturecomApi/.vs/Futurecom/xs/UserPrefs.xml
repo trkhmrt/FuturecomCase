@@ -1,0 +1,80 @@
+﻿<Properties StartupConfiguration="{54ADF810-4C44-4358-B4CE-CCE59311D234}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Middlewares/TokenCheckerMiddleware.cs" relfile="Middlewares/TokenCheckerMiddleware.cs" line="15" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/YasakController.cs" relfile="Controllers/YasakController.cs" line="15" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="161" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="49" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="49" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="../BusinessLayer/Abstract/IGenericUserServices/IUserService.cs">
+    <Files>
+      <File FileName="../DataAccessLayer/Concrete/Context.cs" />
+      <File FileName="../EntityLayer/Concrete/User.cs" />
+      <File FileName="Properties/launchSettings.json" />
+      <File FileName="Program.cs" />
+      <File FileName="../DataAccessLayer/TokenManager/TokenGenerator.cs" />
+      <File FileName="../DataAccessLayer/Migrations/20240310195551_TokenLogs.cs" />
+      <File FileName="../DataAccessLayer/Migrations/20240310195551_TokenLogs.Designer.cs" />
+      <File FileName="Controllers/AuthController.cs" />
+      <File FileName="../BusinessLayer/Concrete/LogManager.cs" />
+      <File FileName="../DataAccessLayer/EntityFramework/EfLogRepository.cs" />
+      <File FileName="../DataAccessLayer/Identity/IdLoginRepository.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericAuth/IAuthDal.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericAuthServices/IGenericAuthService.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericAuthServices/IAuthService.cs" />
+      <File FileName="../BusinessLayer/Concrete/AuthManager.cs" />
+      <File FileName="../DataAccessLayer/EntityFramework/EfUserRepository.cs" />
+      <File FileName="../DataAccessLayer/Repositories/GenericUserRepository.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IGenericUserDal.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IUserDal.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericUserServices/IGenericUserService.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericUserServices/IUserService.cs" Line="8" Column="1" />
+      <File FileName="Controllers/LogController.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserPasswordDto.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserLogoutDto.cs" />
+      <File FileName="Middlewares/GlobalExceptionHandlingMiddleware.cs" />
+      <File FileName="../DataAccessLayer/Repositories/GenericAuthRepository.cs" />
+      <File FileName="Controllers/UserController.cs" />
+      <File FileName="../DataAccessLayer/Repositories/GenericLogRepository.cs" />
+      <File FileName="../EntityLayer/Concrete/Error.cs" />
+      <File FileName="../BusinessLayer/Concrete/UserManagement.cs" />
+      <File FileName="appsettings.json" />
+      <File FileName="WeatherForecast.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserRegisterDto.cs" />
+      <File FileName="../DtoLayer/LoginDtos/LoginDto.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserDeleteDto.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericLog/IGenericLogDal.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericLog/ILogDal.cs" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericAuth/IGenericAuthDal.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericLogServices/IGenericLogService.cs" />
+      <File FileName="../BusinessLayer/Abstract/IGenericLogServices/ILogService.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Futurecom" expanded="True">
+            <Node name="BusinessLayer">
+              <Node name="Abstract" expanded="True">
+                <Node name="IGenericUserServices" expanded="True">
+                  <Node name="IUserService.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="DataAccessLayer">
+              <Node name="Concrete" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.FuturecomApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+</Properties>
