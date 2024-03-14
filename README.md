@@ -22,7 +22,9 @@ Klasör içerisinde bulunan Futurecom.bak dosyasını veritabanında restore yap
 
 3-Backend Projesinin Çalıştırılması
 
-1-Terminali açın
+Visual studio içerisinde proje açıldıktan sonra;
+
+1-Visual studip içerisinde Terminali açın
 2-dotnet clean 
 3-dotnet build
 
@@ -35,7 +37,7 @@ kullanıcı adı:admin
 şifre:  Abc_123456
 
 User
-kullanucı adı: normaluser
+kullanıcı adı: normaluser
 şifre:  Abc_123456
 
 
