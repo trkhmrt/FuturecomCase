@@ -1,6 +1,7 @@
 ﻿using System;
 using BusinessLayer.Abstract.IGenericUserServices;
 using DataAccessLayer.Abstract.IGenericUser;
+using DtoLayer.LoginDto;
 using DtoLayer.UserDtos;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +17,23 @@ namespace BusinessLayer.Concrete
             _userDal = userDal;
         }
 
-        public ICollection<User> GetAllUser(UserManager<User> userManager)
+
+        public User FindUserByUsername(string username)
         {
-            return _userDal.GetAllUser(userManager);
+            return _userDal.FindUserByUsername(username);
         }
+
+        public ICollection<User> GetAllUser()
+        {
+            return _userDal.GetAllUser();
+        }
+
+        public string GetRoleByUsername(string username)
+        {
+            
+           return _userDal.GetRoleByUsername(username);
+        }
+
 
         public User UserAdd(UserRegisterDto user)
         {

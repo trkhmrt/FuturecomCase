@@ -43,20 +43,15 @@ namespace FuturecomApi.Controllers
         }
 
 
-        [HttpGet("test")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> AddUser()
-        {
-            return Ok();
-        }
+    
 
 
-        [HttpGet]
-        public async Task<IActionResult> ListUser()
-        {
+        [HttpGet("listuser")]
+        public async Task<IActionResult> ListUser()        {
+           
             try
             {
-                var users = userManagement.GetAllUser(_userManager);
+                var users = userManagement.GetAllUser();
                 return Ok(users);
             }
             catch
@@ -69,8 +64,7 @@ namespace FuturecomApi.Controllers
 
 
 
-        [HttpPost]
-        [Route("AddUser")]
+        [HttpPost("adduser")]
         public async Task<IActionResult> AddUser([FromBody] UserRegisterDto user)
         {
 
@@ -82,11 +76,11 @@ namespace FuturecomApi.Controllers
                 if (result.Succeeded)
                 {
                     var roleResult = await _userManager.AddToRoleAsync(Iduser, user.Role);
-                    return Ok();
+                    return Ok("Kullanıcı eklendi");
                 }
                 else
                 {
-                    return BadRequest("Register Failed");
+                    return BadRequest(new {message="Bilgileri gözden geçirin"});
                 }
 
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccessLayer.Abstract.IGenericUser;
 using DataAccessLayer.Concrete;
+using DtoLayer.LoginDto;
 using DtoLayer.UserDtos;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -13,12 +14,62 @@ namespace DataAccessLayer.Repositories
     public class GenericUserRepository<T> : IGenericUserDal<User> where T:class
     {
         protected Context _context = new Context();
-        
 
-        public ICollection<User> GetAllUser(UserManager<User> userManager)
+        public User FindUserByUsername(string username)
         {
-            return userManager.Users.ToList(); 
+
+            var foundUser = _context.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (foundUser != null)
+            {
+               
+                 
+                return foundUser;
+            }
+
+            return null;
         }
+
+
+
+
+        public ICollection<User> GetAllUser()
+        {
+            return _context.Users.ToList(); 
+        }
+
+        public string GetRoleByUsername(string username)
+        {
+
+            var foundUserId = _context.Users.FirstOrDefault(u => u.UserName == username)?.Id;
+
+            if (foundUserId != null)
+            {
+                var roleId = _context.UserRoles
+                                    .Where(r => r.UserId == foundUserId)
+                                    .Select(r => r.RoleId)
+                                    .FirstOrDefault();
+
+                if (roleId != null)
+                {
+                    var rolename = _context.Roles
+                                           .FirstOrDefault(r => r.Id == roleId)
+                                           ?.Name;
+
+                    if (rolename != null)
+                    {
+                        return rolename;
+                    }
+                }
+            }
+
+            return "I couldn't bring role";
+
+
+
+        }
+
+
 
         public void UserDelete(UserDeleteDto user)
         {
@@ -26,6 +77,9 @@ namespace DataAccessLayer.Repositories
             _context.Remove(result);
             _context.SaveChanges();
         }
+
+
+
 
         public void UserUpdate(UserUpdateDto user)
         {

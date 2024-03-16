@@ -2,8 +2,10 @@
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.TokenManager;
 using EntityLayer.Concrete;
 using FuturecomApi.Middlewares;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -66,17 +68,23 @@ public class Program
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,
-                ValidateIssuerSigningKey = true
+                ValidateIssuerSigningKey = true,
+           
             };
         });
-       
+
+
+
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
         builder.Services.AddAuthorization();
         builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
-  
+       
+        
+
         var app = builder.Build();
 
-        
+        app.UseRouting();
 
         app.UseCors();
         // Configure the HTTP request pipeline.
@@ -85,15 +93,23 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
-        app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
-        app.UseHttpsRedirection();
-     
         app.UseAuthorization();
         app.UseAuthentication();
 
-        app.MapControllers();
 
+        //GLobalhandling
+        app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+
+
+
+        app.MapControllers();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+       
+        app.UseMiddleware<HelloMiddleware>();
+        app.UseHttpsRedirection();
         app.Run();
     }
 }

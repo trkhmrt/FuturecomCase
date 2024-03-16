@@ -12,9 +12,7 @@
     <None Remove="Repositories\" />
     <None Remove="Abstract\" />
     <None Remove="EntityFramework\" />
-    <None Remove="Identity\" />
     <None Remove="Abstract\IGenericLog\" />
-    <None Remove="Abstract\IGenericAuth\" />
     <None Remove="Abstract\IGenericUser\" />
   </ItemGroup>
   <ItemGroup>
@@ -23,9 +21,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Abstract\" />
     <Folder Include="EntityFramework\" />
-    <Folder Include="Identity\" />
     <Folder Include="Abstract\IGenericLog\" />
-    <Folder Include="Abstract\IGenericAuth\" />
     <Folder Include="Abstract\IGenericUser\" />
   </ItemGroup>
   <ItemGroup>

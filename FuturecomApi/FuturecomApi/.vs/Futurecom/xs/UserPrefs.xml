@@ -5,67 +5,69 @@
     <BreakpointStore>
       <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Middlewares/TokenCheckerMiddleware.cs" relfile="Middlewares/TokenCheckerMiddleware.cs" line="15" column="1" />
       <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/YasakController.cs" relfile="Controllers/YasakController.cs" line="15" column="1" />
-      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="161" column="1" />
-      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="49" column="1" />
-      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="49" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/TokenController.cs" relfile="Controllers/TokenController.cs" line="8" column="1" />
+      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/LogController.cs" relfile="Controllers/LogController.cs" line="25" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="../BusinessLayer/Abstract/IGenericUserServices/IUserService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../DataAccessLayer/TokenManager/RefreshTokenManager.cs">
     <Files>
-      <File FileName="../DataAccessLayer/Concrete/Context.cs" />
-      <File FileName="../EntityLayer/Concrete/User.cs" />
+      <File FileName="../DataAccessLayer/Concrete/Context.cs" Line="9" Column="2" />
+      <File FileName="../EntityLayer/Concrete/User.cs" Line="14" Column="3" />
       <File FileName="Properties/launchSettings.json" />
-      <File FileName="Program.cs" />
-      <File FileName="../DataAccessLayer/TokenManager/TokenGenerator.cs" />
+      <File FileName="Program.cs" Line="113" Column="1" />
       <File FileName="../DataAccessLayer/Migrations/20240310195551_TokenLogs.cs" />
       <File FileName="../DataAccessLayer/Migrations/20240310195551_TokenLogs.Designer.cs" />
-      <File FileName="Controllers/AuthController.cs" />
+      <File FileName="Controllers/AuthController.cs" Line="47" Column="86" />
       <File FileName="../BusinessLayer/Concrete/LogManager.cs" />
-      <File FileName="../DataAccessLayer/EntityFramework/EfLogRepository.cs" />
-      <File FileName="../DataAccessLayer/Identity/IdLoginRepository.cs" />
-      <File FileName="../DataAccessLayer/Abstract/IGenericAuth/IAuthDal.cs" />
-      <File FileName="../BusinessLayer/Abstract/IGenericAuthServices/IGenericAuthService.cs" />
-      <File FileName="../BusinessLayer/Abstract/IGenericAuthServices/IAuthService.cs" />
-      <File FileName="../BusinessLayer/Concrete/AuthManager.cs" />
-      <File FileName="../DataAccessLayer/EntityFramework/EfUserRepository.cs" />
-      <File FileName="../DataAccessLayer/Repositories/GenericUserRepository.cs" />
-      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IGenericUserDal.cs" />
-      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IUserDal.cs" />
-      <File FileName="../BusinessLayer/Abstract/IGenericUserServices/IGenericUserService.cs" />
+      <File FileName="../DataAccessLayer/EntityFramework/EfLogRepository.cs" Line="1" Column="1" />
+      <File FileName="../BusinessLayer/Abstract/IGenericAuthServices/IGenericAuthService.cs" Line="1" Column="1" />
+      <File FileName="../DataAccessLayer/EntityFramework/EfUserRepository.cs" Line="1" Column="1" />
+      <File FileName="../DataAccessLayer/Repositories/GenericUserRepository.cs" Line="74" Column="31" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IGenericUserDal.cs" Line="13" Column="35" />
+      <File FileName="../DataAccessLayer/Abstract/IGenericUser/IUserDal.cs" Line="1" Column="1" />
+      <File FileName="../BusinessLayer/Abstract/IGenericUserServices/IGenericUserService.cs" Line="13" Column="35" />
       <File FileName="../BusinessLayer/Abstract/IGenericUserServices/IUserService.cs" Line="8" Column="1" />
-      <File FileName="Controllers/LogController.cs" />
+      <File FileName="Controllers/LogController.cs" Line="30" Column="1" />
       <File FileName="../DtoLayer/UserDtos/UserPasswordDto.cs" />
-      <File FileName="../DtoLayer/UserDtos/UserLogoutDto.cs" />
-      <File FileName="Middlewares/GlobalExceptionHandlingMiddleware.cs" />
-      <File FileName="../DataAccessLayer/Repositories/GenericAuthRepository.cs" />
-      <File FileName="Controllers/UserController.cs" />
-      <File FileName="../DataAccessLayer/Repositories/GenericLogRepository.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserLogoutDto.cs" Line="1" Column="1" />
+      <File FileName="../BusinessLayer/Concrete/UserManagement.cs" Line="52" Column="1" />
+      <File FileName="Middlewares/GlobalExceptionHandlingMiddleware.cs" Line="71" Column="1" />
+      <File FileName="Controllers/UserController.cs" Line="49" Column="27" />
+      <File FileName="../DataAccessLayer/Repositories/GenericLogRepository.cs" Line="1" Column="1" />
       <File FileName="../EntityLayer/Concrete/Error.cs" />
-      <File FileName="../BusinessLayer/Concrete/UserManagement.cs" />
-      <File FileName="appsettings.json" />
+      <File FileName="appsettings.json" Line="11" Column="12" />
       <File FileName="WeatherForecast.cs" />
-      <File FileName="../DtoLayer/UserDtos/UserRegisterDto.cs" />
-      <File FileName="../DtoLayer/LoginDtos/LoginDto.cs" />
-      <File FileName="../DtoLayer/UserDtos/UserDeleteDto.cs" />
+      <File FileName="../DtoLayer/UserDtos/UserRegisterDto.cs" Line="18" Column="41" />
+      <File FileName="../DtoLayer/LoginDtos/LoginDto.cs" Line="10" Column="1" />
+      <File FileName="../DtoLayer/UserDtos/UserDeleteDto.cs" Line="8" Column="1" />
       <File FileName="../DataAccessLayer/Abstract/IGenericLog/IGenericLogDal.cs" />
       <File FileName="../DataAccessLayer/Abstract/IGenericLog/ILogDal.cs" />
-      <File FileName="../DataAccessLayer/Abstract/IGenericAuth/IGenericAuthDal.cs" />
       <File FileName="../BusinessLayer/Abstract/IGenericLogServices/IGenericLogService.cs" />
       <File FileName="../BusinessLayer/Abstract/IGenericLogServices/ILogService.cs" />
+      <File FileName="Modeller/ApiKullanici.cs" Line="12" Column="20" />
+      <File FileName="Controllers/KimlikDenetimiController.cs" Line="23" Column="9" />
+      <File FileName="Middlewares/HelloMiddleware.cs" Line="8" Column="1" />
+      <File FileName="../DataAccessLayer/TokenManager/JwtSettings.cs" Line="13" Column="6" />
+      <File FileName="../DataAccessLayer/TokenManager/TokenGenerator.cs" Line="45" Column="10" />
+      <File FileName="../DtoLayer/UserDtos/UserUpdateDto.cs" Line="1" Column="1" />
+      <File FileName="../DataAccessLayer/TokenManager/RefreshTokenManager.cs" Line="24" Column="53" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Futurecom" expanded="True">
             <Node name="BusinessLayer">
-              <Node name="Abstract" expanded="True">
-                <Node name="IGenericUserServices" expanded="True">
-                  <Node name="IUserService.cs" selected="True" />
-                </Node>
-              </Node>
+              <Node name="Concrete" expanded="True" />
             </Node>
             <Node name="DataAccessLayer">
+              <Node name="Repositories" expanded="True" />
+            </Node>
+            <Node name="EntityLayer" expanded="True">
               <Node name="Concrete" expanded="True" />
+            </Node>
+            <Node name="FuturecomApi">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Middlewares" expanded="True" />
             </Node>
           </Node>
         </State>

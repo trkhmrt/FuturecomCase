@@ -25,14 +25,12 @@
     <None Remove="Abstract\" />
     <None Remove="Concrete\" />
     <None Remove="Abstract\IGenericLogServices\" />
-    <None Remove="Abstract\IGenericAuthServices\" />
     <None Remove="Abstract\IGenericUserServices\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
     <Folder Include="Concrete\" />
     <Folder Include="Abstract\IGenericLogServices\" />
-    <Folder Include="Abstract\IGenericAuthServices\" />
     <Folder Include="Abstract\IGenericUserServices\" />
   </ItemGroup>
   <ItemGroup>

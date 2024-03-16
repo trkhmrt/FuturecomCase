@@ -5,6 +5,8 @@ namespace DtoLayer.UserDtos
 	{
 		public string id { get; set; }
 
+
+
 	}
 }
 
