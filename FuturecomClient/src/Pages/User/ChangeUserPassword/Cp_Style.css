@@ -1,0 +1,13 @@
+.container{
+    background-color: 'rgba(255,255,255,0.1)';
+    width: '30vw';
+    max-height: '60vh';
+    display: 'flex';
+    flex-direction: 'column';
+    padding: 20;
+    justify-content: 'space-evenly';
+    min-height: '60vh';
+     border-radius: 20 ;
+     gap:10
+
+}

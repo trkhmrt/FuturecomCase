@@ -14,9 +14,11 @@ namespace DataAccessLayer.Abstract.IGenericUser
 
         void UserUpdate(UserUpdateDto user);
 
-        void UserDelete(UserDeleteDto user);
+        void UserDelete(string userId);
 
         User FindUserByUsername(string username);
+
+        User GetUserById(string userId);
 
         string GetRoleByUsername(string username);
          

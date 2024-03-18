@@ -23,7 +23,7 @@ namespace DataAccessLayer.TokenManager
             var claimDizisi = new[]
             {
                 new Claim("id",user.Id.ToString()),
-                new Claim("role",role.ToString()),
+                new Claim("role",role),
                 new Claim("name",user.FirstName),
                 new Claim("lastname",user.LastName)
 
@@ -32,8 +32,9 @@ namespace DataAccessLayer.TokenManager
             var token = new JwtSecurityToken(
                 issuer: "https://localhost:7069/", 
                 audience: "https://localhost:7069/",
-                claimDizisi,
-                expires: DateTime.UtcNow.AddMinutes(1),
+                claims:claimDizisi,
+
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: credentials
                 );
 

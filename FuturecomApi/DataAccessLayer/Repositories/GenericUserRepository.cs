@@ -69,12 +69,19 @@ namespace DataAccessLayer.Repositories
 
         }
 
-
-
-        public void UserDelete(UserDeleteDto user)
+        public User GetUserById(string userId)
         {
-            var result = _context.Users.FirstOrDefault(u => u.Id == user.id);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+            return user;
+        }
+
+        public void UserDelete(string userId)
+        {
+            var result = _context.Users.FirstOrDefault(u => u.Id == userId);
+
             _context.Remove(result);
+
             _context.SaveChanges();
         }
 

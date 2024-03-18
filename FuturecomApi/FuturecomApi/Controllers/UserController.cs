@@ -47,20 +47,39 @@ namespace FuturecomApi.Controllers
 
 
         [HttpGet("listuser")]
-        public async Task<IActionResult> ListUser()        {
+  
+        public async Task<IActionResult> ListUser()
+        {
+            
            
-            try
-            {
-                var users = userManagement.GetAllUser();
-                return Ok(users);
-            }
-            catch
-            {
-                return BadRequest();
-            }
 
+        
+
+         
+
+
+            var users = userManagement.GetAllUser();
+                
+                return Ok(users);
+          
 
         }
+
+        [HttpGet]
+        [Route("{userId}")]
+        public async Task<IActionResult> GetUserById(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new {User=user});
+        }
+
 
 
 
@@ -96,31 +115,31 @@ namespace FuturecomApi.Controllers
 
 
         [HttpPost]
-        [Route("ChangePassword")]
+        [Route("changepw")]
         public async Task<IActionResult> ChangePassword([FromBody] UserPasswordDto request)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(request.id);
+                var user = await _userManager.FindByIdAsync(request.Id);
                 if (user == null)
                 {
                     return BadRequest("Invalid user");
                 }
 
 
-                if (!await _userManager.CheckPasswordAsync(user, request.currentPassword))
+                if (!await _userManager.CheckPasswordAsync(user, request.CurrentPassword))
                 {
                     return BadRequest("Incorrect current password");
                 }
 
 
-                var result = await _userManager.ChangePasswordAsync(user, request.currentPassword, request.newPassword);
+                var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
                 if (result.Succeeded)
                 {
 
 
 
-                    logManager.ChangePasswordLogAdd(request.Token, request.id);
+                   
                     return Ok("Password changed successfully");
 
 
@@ -136,40 +155,47 @@ namespace FuturecomApi.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(string id)
+
+
+        [HttpPut]
+        [Route("{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateDto userupdate)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
-        }
+          
+               
+                user.Email = userupdate.mail;
+                user.PhoneNumber = userupdate.phone;
 
-        
-        [HttpPost("update")]
-        public async Task<IActionResult> UpdateUser([FromBody]UserUpdateDto user)
+              
+                var result = await _userManager.UpdateAsync(user);
+
+          
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+                    return Ok();
+                }
+                else
+                {
+                   
+                    return StatusCode(500, "Error updating user");
+                }
+            }
+
+
+        [HttpDelete("delete/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
         {
             try
             {
-                userManagement.UserUpdate(user);
-                return Ok();
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpPost("delete")]
-        public async Task<IActionResult> DeleteUser([FromBody] UserDeleteDto user)
-        {
-            try
-            {
-                userManagement.UserDelete(user);
+                userManagement.UserDelete(userId);
                 return Ok();
             }
             catch

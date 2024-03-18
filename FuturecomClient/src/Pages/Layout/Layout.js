@@ -12,7 +12,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import TreeView from '../../components/TreeView/TreeView'
 import UserTreeView from '../../components/TreeView/UserTreeView'
-import MenuList from '../../Pages/MenuList/MenuList'
+import MenuList from '../../components/MenuList/MenuList'
+import MenuListUser from '../../components/MenuList/MenuListUser'
 import Navbar from '../../components/Navbar/Navbar'
 import axios from 'axios';
 
@@ -25,7 +26,7 @@ import { Button } from '@mui/material';
 const pages = ['Anasayfa'];
 const settings = ['Change Password', 'Refresh Token', 'Logout'];
 
-function ResponsiveAppBar({sure}) {
+function ResponsiveAppBar() {
   const [token,setToken] = useState('')
   const [id,setId]=useState('')
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -116,11 +117,10 @@ function ResponsiveAppBar({sure}) {
   return (
     
     <div style={{backgroundImage: '  linear-gradient( 109.6deg,  rgba(24,138,141,1) 11.2%, rgba(96,221,142,1) 91.1% )',display:'flex',flexDirection:'row'}}>
-      <h1>{sure}</h1>
     <div>
-     <MenuList></MenuList>
+       {localStorage.getItem('role')=='Admin' ?  <MenuList/>  : <MenuListUser/>  }   
     </div>
-    <div style={{width:'100vw',height:'100vh',backgroundColor:'rgba(255,255,255,0.2)',display:'flex',justifyContent:'start',alignItems:'center',flexDirection:'column',gap:150,padding:10}}>
+    <div style={{width:'100vw',height:'100vh',backgroundColor:'rgba(255,255,255,0.2)',display:'flex',justifyContent:'start',alignItems:'center',flexDirection:'column',gap:30,padding:10}}>
       <Navbar></Navbar>
     <Outlet></Outlet>
     </div>

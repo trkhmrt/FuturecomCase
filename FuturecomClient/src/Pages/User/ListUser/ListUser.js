@@ -13,13 +13,13 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import Switch from '@mui/material/Switch';
-
+import {useNavigate} from "react-router-dom";
 
 export default function ListUser() {
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState([]);
   const rowsPerPage = 5;
- 
+  const navigate=useNavigate()
 
 
   useEffect(() => {
@@ -28,7 +28,13 @@ export default function ListUser() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://localhost:7069/User/listuser');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+          id:localStorage.getItem('userId')
+        }
+      };
+      const response = await axios.get('https://localhost:7069/User/listuser',config);
       setUserData(response.data);
       console.log(response.data)
     } catch (error) {
@@ -36,8 +42,27 @@ export default function ListUser() {
     }
   };
 
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(`https://localhost:7069/User/delete/${userId}`);
+
+      if (response.status === 200) {
+        // User deleted successfully
+        setUserData(userData.filter((user) => user.id !== userId));
+      } else {
+        console.error('Error deleting user:', response.data);
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const handleEditClick = (userId) => {
+    navigate(`/userinfo/${userId}`); // Navigate using useNavigate
   };
 
   return (
@@ -74,12 +99,12 @@ export default function ListUser() {
                 <TableCell align="right">{user.status===false ? <p>Passive</p> : <p>Active</p>}</TableCell>
 
                 <TableCell align="right">  
-                <IconButton aria-label="delete" size="large">
+                <IconButton aria-label="delete" size="large" onClick={() => handleDeleteUser(user.id)}>
                 <DeleteIcon />
                 </IconButton>
                 </TableCell>
                 
-                <TableCell align="right"><EditNoteIcon></EditNoteIcon></TableCell>
+                <TableCell align="right" onClick={()=>handleEditClick(user.id)}><EditNoteIcon></EditNoteIcon></TableCell>
                 
                
               </TableRow>

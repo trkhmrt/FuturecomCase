@@ -17,3 +17,4 @@
 /Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/obj/Debug/net7.0/ref/DataAccessLayer.dll
 /Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/bin/Debug/net7.0/DtoLayer.dll
 /Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/bin/Debug/net7.0/DtoLayer.pdb
+/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/obj/Debug/net7.0/DataAccessLayer.sourcelink.json

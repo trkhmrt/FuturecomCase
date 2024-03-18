@@ -5,7 +5,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.TokenManager;
 using EntityLayer.Concrete;
 using FuturecomApi.Middlewares;
-
+using FuturecomApi.Modeller;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -78,8 +78,9 @@ public class Program
         builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
         builder.Services.AddAuthorization();
+        builder.Services.AddTransient<GlobalTokenHandler>();
         builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
-       
+        builder.Services.AddTransient<SeedData>();
         
 
         var app = builder.Build();
@@ -93,13 +94,20 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseAuthorization();
+
+
+       
+
+
+            app.UseAuthorization();
         app.UseAuthentication();
 
 
         //GLobalhandling
+        
+        app.UseMiddleware<GlobalTokenHandler>();
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
-
+      
 
 
         app.MapControllers();
@@ -107,8 +115,7 @@ public class Program
         {
             endpoints.MapControllers();
         });
-       
-        app.UseMiddleware<HelloMiddleware>();
+      
         app.UseHttpsRedirection();
         app.Run();
     }

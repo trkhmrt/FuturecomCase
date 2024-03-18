@@ -21,41 +21,61 @@ namespace FuturecomApi.Controllers
     public class AuthController : Controller
     {
         private readonly SignInManager<User> _signInManager;
-        
+        private readonly UserManager<User> _userManager;
 
         LogManager logManager = new LogManager(new EfLogRepository());
         UserManagement userManagement = new UserManagement(new EfUserRepository());
 
        
-        public AuthController(SignInManager<User> signInManager)
+        public AuthController(SignInManager<User> signInManager,UserManager<User> userManager)
         {
             _signInManager = signInManager;
-      
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var user = userManagement.FindUserByUsername(loginDto.UserName);
+            var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
-            if (user != null)
+
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                var signin = await _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
-                if (signin.Succeeded)
-                {
-
-                    AccessTokenGenerator tokenGenerator = new AccessTokenGenerator();
-                      var token =tokenGenerator.CreateToken(user, "admin");
-
-
-                    return Ok(new { Token = token });
-                }
+                return NotFound("Kullanıcı bulunamadı veya parola yanlış.");
             }
 
-            return NotFound();
-        }
+
+            var role = await _userManager.GetRolesAsync(user);
+
+
+            var result = await _signInManager.PasswordSignInAsync(loginDto.UserName, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
+
+            if (!result.Succeeded)
+            {
+                // Oturum açma başarılı ise başarılı yanıt dön
+                return BadRequest("Oturum açma başarısız");
+            }
+
+
+            AccessTokenGenerator tokenGenerator = new AccessTokenGenerator();
+            RefreshTokenManager refreshTokenManager = new RefreshTokenManager();
+
+
+            var token = tokenGenerator.CreateToken(user, role[0]);
+            var refreshtoken = refreshTokenManager.CreateRefreshToken();
+
+
+           
+                    
+
+             return Ok(new { AccessToken = token , RefreshToken=refreshtoken});
+                
+            }
+
+
 
         [HttpPost("logout")]
+        [AllowAnonymous]
         public async Task<IActionResult> Logout([FromBody] UserLogoutDto logoutDto)
         {
             try
@@ -69,4 +89,8 @@ namespace FuturecomApi.Controllers
             }
         }
     }
-}
+
+ }
+
+
+

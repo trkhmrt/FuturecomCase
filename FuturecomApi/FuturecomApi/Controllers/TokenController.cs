@@ -5,8 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.TokenManager;
+using DtoLayer.TokenDtos;
+using EntityLayer.Concrete;
 using FuturecomApi.Modeller;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +23,9 @@ namespace FuturecomApi.Controllers
   
     public class TokenController : Controller
     {
+       
+        
+
 
         
        

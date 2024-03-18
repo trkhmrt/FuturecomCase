@@ -32,38 +32,35 @@ namespace FuturecomApi.Middlewares
             try
             {
                 await next(context);
+
+
+
+
             }
-            catch (Exception e)
-            {
-               
-
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-                ProblemDetails problem = new()
+          
+                catch (Exception e)
                 {
-                    Status = (int)HttpStatusCode.InternalServerError,
-                    Type = "Server",
-                    Title = "Server error",
-                    Detail = "An internal server occured"
-                };
-                string json = JsonSerializer.Serialize(problem);
-                await context.Response.WriteAsync(json);
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                context.Response.ContentType = "application/json";
+                   
+                    _context.Errors.Add(new Error
+                    {
+                        Type = "Exception",
+                        StatusCode = context.Response.StatusCode.ToString(),
+                        Message = e.Message, 
+                        CreatedDate = DateTime.UtcNow
+                    });
+                    await _context.SaveChangesAsync();
 
-            }
+                    
+                }
 
-            if(context.Response.StatusCode!=200)
-            {
-                _context.Errors.Add(new Error
-                {
-                    Type = context.Request.Method.ToString(),
-                    StatusCode = context.Response.StatusCode.ToString(),
-                    Message = context.Request.Path,
-                    CreatedDate = DateTime.UtcNow
-                });
-                await _context.SaveChangesAsync();
-            }
+
+
+
+            
+
+           
            
 
 
@@ -71,4 +68,5 @@ namespace FuturecomApi.Middlewares
         }
     }
 }
+
 

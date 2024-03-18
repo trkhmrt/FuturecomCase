@@ -66,28 +66,39 @@ const Login = () => {
                    
                      if(response.status==200)
                      {
-                        const token = response.data.token
-                        const decodedToken = jwtDecode(token);
-                        localStorage.setItem('userinfo',decodedToken)
-                        const userId = decodedToken.id; // NameIdentifier için
-const role = decodedToken.role; // Role için
-const firstName = decodedToken.name; // İsim için
-const lastName = decodedToken.lastname; // Soyisim için
-const expDateInSeconds = decodedToken.exp;
-const expDate = new Date(expDateInSeconds * 1000);
+                      
+                      
+                      console.log(response.data.refreshToken)
 
-console.log('User ID:', userId);
-console.log('Role:', role);
-console.log('First Name:', firstName);
-console.log('Last Name:', lastName);
-console.log('Süre:',expDate)
+                      const token = response.data.accessToken
+                      const refreshtoken = response.data.refreshToken
+                      localStorage.setItem("accesstoken",token)
+                      localStorage.setItem("refreshtoken",refreshtoken)
+                      const decodedToken = jwtDecode(token);
+                      console.log(decodedToken)
+                     
+                      const userId = decodedToken.id; 
+                      const role = decodedToken.role; 
+                      const firstName = decodedToken.name; 
+                      const lastName = decodedToken.lastname; 
+                      const expDateInSeconds = decodedToken.exp;
+                      const expDate = new Date(expDateInSeconds * 1000);
+                      const expMinutes = expDate.getMinutes()
+
+                      
+                      localStorage.setItem('userId',userId)
+                      localStorage.setItem('role',role)
+                      localStorage.setItem('firstname',firstName)
+                      localStorage.setItem('lastname',lastName)
+                      localStorage.setItem('exp',expDate)
+                      localStorage.setItem('minute',expMinutes)
 
 
                          
 
 
                         
-                        navigate('/')
+                        navigate('/home')
                      } 
                   }
                
@@ -110,7 +121,7 @@ console.log('Süre:',expDate)
                        navigate('/anasayfa')
                      }
                       else {
-                        // İstek yapılamadı
+                        
                         console.log('İstek yapılamadı:', error.message);
                       } 
                     

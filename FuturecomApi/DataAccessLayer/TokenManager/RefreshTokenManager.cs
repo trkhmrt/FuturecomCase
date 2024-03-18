@@ -22,7 +22,7 @@ namespace DataAccessLayer.TokenManager
             var token = new JwtSecurityToken(
                 issuer: "https://localhost:7069/",
                 audience: "https://localhost:7069/",
-                expires: DateTime.UtcNow.AddDays(1), 
+                expires: DateTime.UtcNow.AddDays(10), 
                 signingCredentials: credentials
                 );
 

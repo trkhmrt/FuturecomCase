@@ -32,12 +32,12 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Middlewares\" />
-    <None Remove="Modeller\" />
+    <None Remove="SeedData\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Middlewares\" />
-    <Folder Include="Modeller\" />
+    <Folder Include="SeedData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">

@@ -34,6 +34,10 @@ namespace BusinessLayer.Concrete
            return _userDal.GetRoleByUsername(username);
         }
 
+        public User GetUserById(string userId)
+        {
+            return _userDal.GetUserById(userId);
+        }
 
         public User UserAdd(UserRegisterDto user)
         {
@@ -51,9 +55,9 @@ namespace BusinessLayer.Concrete
              
         }
 
-        public void UserDelete(UserDeleteDto user)
+        public void UserDelete(string userId)
         {
-            _userDal.UserDelete(user);
+            _userDal.UserDelete(userId);
         }
 
         public void UserUpdate(UserUpdateDto user)

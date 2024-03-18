@@ -14,8 +14,10 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import {useNavigate} from "react-router-dom";
 
 export default function MenuList() {
+ 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
+  const [userId,setUserId] =React.useState(localStorage.getItem('userId'))
 
   const handleClick = () => {
     setOpen(!open);
@@ -23,7 +25,7 @@ export default function MenuList() {
 
   return (
     <List
-      sx={{height:'100vh', width:'40vh',maxWidth: 360, backgroundColor: 'rgba(0,0,0,0.1)'
+      sx={{height:'100%', width:'40vh',maxWidth: 360, backgroundColor: 'rgba(64, 64, 64, 0.1)'
       
        }}
       component="nav"
@@ -34,12 +36,14 @@ export default function MenuList() {
         </ListSubheader>
       }
     >
-      <ListItemButton>
+         {localStorage.getItem('role')==='Admin' ? <ListItemButton>
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
+       
         <ListItemText primary="Logs" sx={{color:'white'}} onClick={()=>navigate('/loglist')}/>
-      </ListItemButton>
+      </ListItemButton> : <></>}
+      
       <ListItemButton>
         <ListItemIcon>
           <DraftsIcon />
@@ -50,7 +54,7 @@ export default function MenuList() {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="User Management" />
+        <ListItemText primary="Users" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -59,18 +63,11 @@ export default function MenuList() {
             <ListItemIcon>
               <StarBorder/>
             </ListItemIcon>
-            <ListItemText primary="Add New User" sx={{color:'white'}} onClick={()=>navigate('/adduser')} />
+            <ListItemText primary="MyProfile" sx={{color:'white'}} onClick={()=>navigate(`/myprofile`)} />
             
 
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder/>
-            </ListItemIcon>
-            <ListItemText primary="User List" sx={{color:'white'}} onClick={()=>navigate('/listuser')} />
-            
-            
-          </ListItemButton>
+         
         </List>
       </Collapse>
     </List>

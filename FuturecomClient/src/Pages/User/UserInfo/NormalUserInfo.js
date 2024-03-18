@@ -1,47 +1,35 @@
-import axios from "axios";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'; // Import axios
 
-const NormalUserInfo = ({ user }) => {
-    const [phone, setPhone] = useState(user.phoneNumber);
-    const [email, setEmail] = useState(user.email);
-    const [id, setId] = useState(user.id);
+const NormalUserInfo = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        setPhone(user.phoneNumber); 
-        setEmail(user.email); 
-        setId(user.id); 
-    }, [user]);
-
-    const updateUser = async () => {
-        const userToUpdate = {
-            id: id,
-            mail: email,
-            phone: phone,
-        };
-        try {
-            const response = await axios.post("https://localhost:7069/User/update", userToUpdate);
-            alert("Güncellendi")
-        } catch (error) {
-            alert("HATA")
-        }
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7069/User/${id}`);
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
-    return (
-        <div>
-            <h1>{user.firstName} {user.lastName}</h1>
-            <label>Phone</label>
-            <br />
-            <input className="input" value={phone} onChange={(e) => setPhone(e.target.value)} />
-            <br />
-            <br />
-            <label>Mail</label>
-            <br />
-            <input className="input" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <br />
-            <br></br>
-            <button onClick={updateUser}>Update</button>
-        </div>
-    )
-}
+    fetchUserData();
+  }, [id]); // Add id to dependency array
+
+  return (
+    <div>
+      {user ? (
+        <>
+          <p>Role: {user.Role}</p>
+          <p>User Name: {user.User.name}</p> {/* Adjust for other user data fields */}
+        </>
+      ) : (
+        <p>Loading user data...</p>
+      )}
+    </div>
+  );
+};
 
 export default NormalUserInfo;

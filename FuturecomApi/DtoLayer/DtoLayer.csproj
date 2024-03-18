@@ -9,10 +9,12 @@
   <ItemGroup>
     <None Remove="UserDtos\" />
     <None Remove="LoginDtos\" />
+    <None Remove="TokenDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserDtos\" />
     <Folder Include="LoginDtos\" />
+    <Folder Include="TokenDtos\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
