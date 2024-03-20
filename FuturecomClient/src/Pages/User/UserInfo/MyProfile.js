@@ -4,20 +4,50 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import './MyProfile_style.css'
 
+
+
 const MyProfile = () => {
+  const [token,setToken] = useState('')
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+      id:localStorage.getItem('userId')
+    }
+  };
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
   const handleUpdate = async () => {
-    const userId = localStorage.getItem('userId');
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
-        id:localStorage.getItem('userId')
+
+    const checkToken = async ()=>{
+  
+      const features={
+ 
+       refreshtoken:localStorage.getItem('refreshtoken'),
+       accesstoken:localStorage.getItem('accesstoken'),
+       userId:localStorage.getItem('userId')
       }
-    };
+    
+    
+     
+     
+     const response = await axios.post(`https://localhost:7069/token/checktoken`,features,config)
+    
+     if(response.status==200)
+     {
+ 
+     }
+      localStorage.removeItem('accesstoken')
+      const t=localStorage.setItem('accesstoken',response.data)
+      setToken(t)
+     
+   }
+
+
+    const userId = localStorage.getItem('userId');
     try {
-      const response = await axios.put(`https://localhost:7069/User/${userId}`, {
+      checkToken()
+      const response = await axios.put(`https://localhost:7069/User/normaluser/${userId}`, {
         mail: email,
         phone: phone
       }, config);

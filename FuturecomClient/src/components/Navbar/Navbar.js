@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import Chip from '@mui/material/Chip';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -16,8 +16,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import {useNavigate} from "react-router-dom";
 
 const Navbar=()=>{
-  
-
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+      id:localStorage.getItem('userId')
+    }
+  };
+  const [token,setToken] = useState('')
  
 
   const navigate = useNavigate();
@@ -25,13 +30,19 @@ const Navbar=()=>{
     const handleLogout = async () => {
     
       try {
-        const logoutDto = {
-          token: localStorage.getItem('accesstoken'), 
-          id: localStorage.getItem("userId")
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+            id:localStorage.getItem('userId')
+          }
         };
-        const response = await axios.post('https://localhost:7069/Auth/logout',logoutDto)
+        const features={
+          token:localStorage.getItem('accesstoken'),
+          id:localStorage.getItem('userId')
+         }
+        const response = await axios.post('https://localhost:7069/Auth/logout',features,config)
         localStorage.clear(); 
-        navigate("/login")
+        navigate("/")
        
       } catch (error) {
         console.error('Logout hataı:', error);
@@ -39,28 +50,34 @@ const Navbar=()=>{
       }
     };
 
-    const refreshToken = async () => {
-     console.log("merhaba")
-      try {
-        const refreshTokenDto = {
-         
-          userId: localStorage.getItem("userId"),
-          userRole:localStorage.getItem("role"),
-          refreshToken: localStorage.getItem('refreshtoken'), 
-        };
-        const response = await axios.post('https://localhost:7069/Token',refreshTokenDto)
-        localStorage.removeItem('accesstoken')
-        localStorage.setItem('accesstoken',response.data.token)
-       
-       
-      } catch (error) {
-        console.error('Logout hataı:', error);
-        
+ 
+
+    const checkToken = async ()=>{
+  
+      const features={
+ 
+       refreshtoken:localStorage.getItem('refreshtoken'),
+       accesstoken:localStorage.getItem('accesstoken'),
+       userId:localStorage.getItem('userId')
       }
-    };
+    
+    
+     
+     
+     const response = await axios.post(`https://localhost:7069/token/checktoken`,features,config)
+    
+     if(response.status==200)
+     {
+ 
+     }
+      localStorage.removeItem('accesstoken')
+      const t=localStorage.setItem('accesstoken',response.data)
+      setToken(t)
+     
+   }
 
 
- const settings = [{label:'Refresh Token',onClick:refreshToken}, {label:'Change Password',onClick:()=>navigate('/changepassword')}, {label:'Logout',onClick:handleLogout}];
+ const settings = [{label:'Refresh Token',onClick:checkToken}, {label:'Change Password',onClick:()=>navigate('/changepassword')}, {label:'Logout',onClick:handleLogout}];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   
@@ -74,7 +91,8 @@ const Navbar=()=>{
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-    const GoToHome = () => {
+
+  const GoToHome = () => {
         navigate('/home')
       };
 
@@ -109,7 +127,7 @@ const Navbar=()=>{
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting.onClick ? setting.onClick : handleCloseUserMenu}>
+                <MenuItem key={setting.label} onClick={setting.onClick ? setting.onClick : handleCloseUserMenu}>
                   <Typography textAlign="center" >{setting.label}</Typography>
                 </MenuItem>
               ))}

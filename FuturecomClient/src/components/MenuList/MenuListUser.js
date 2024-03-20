@@ -30,11 +30,7 @@ export default function MenuList() {
        }}
       component="nav"
       aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader" sx={{backgroundColor: 'rgba(255,255,255,0.2)'}}>
-          Nested List Items
-        </ListSubheader>
-      }
+      
     >
          {localStorage.getItem('role')==='Admin' ? <ListItemButton>
         <ListItemIcon>
@@ -44,12 +40,7 @@ export default function MenuList() {
         <ListItemText primary="Logs" sx={{color:'white'}} onClick={()=>navigate('/loglist')}/>
       </ListItemButton> : <></>}
       
-      <ListItemButton>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItemButton>
+    
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />

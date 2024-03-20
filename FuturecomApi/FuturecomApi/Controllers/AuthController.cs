@@ -23,21 +23,27 @@ namespace FuturecomApi.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
 
-        LogManager logManager = new LogManager(new EfLogRepository());
-        UserManagement userManagement = new UserManagement(new EfUserRepository());
 
-       
+        AccessTokenGenerator tokenGenerator = new AccessTokenGenerator();
+        RefreshTokenManager refreshTokenManager = new RefreshTokenManager();
+        LogManager logManager = new LogManager(new EfLogRepository());
+
+
         public AuthController(SignInManager<User> signInManager,UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
+          
+
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
+            var userid = await _userManager.GetUserIdAsync(user);
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
@@ -50,24 +56,24 @@ namespace FuturecomApi.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(loginDto.UserName, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
+
+           
+
             if (!result.Succeeded)
             {
-                // Oturum açma başarılı ise başarılı yanıt dön
+               
                 return BadRequest("Oturum açma başarısız");
             }
 
-
-            AccessTokenGenerator tokenGenerator = new AccessTokenGenerator();
-            RefreshTokenManager refreshTokenManager = new RefreshTokenManager();
 
 
             var token = tokenGenerator.CreateToken(user, role[0]);
             var refreshtoken = refreshTokenManager.CreateRefreshToken();
 
 
-           
-                    
 
+
+            logManager.LogAdd(userid,"L");
              return Ok(new { AccessToken = token , RefreshToken=refreshtoken});
                 
             }
@@ -80,7 +86,11 @@ namespace FuturecomApi.Controllers
         {
             try
             {
-                logManager.LogOutAdd(logoutDto.token, logoutDto.id);
+                var user = await _userManager.FindByIdAsync(logoutDto.id);
+
+                var userid = await _userManager.GetUserIdAsync(user);
+
+                logManager.LogAdd(userid, "LO");
                 return Ok();
             }
             catch (Exception)

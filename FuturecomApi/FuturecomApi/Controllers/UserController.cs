@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -28,17 +29,17 @@ namespace FuturecomApi.Controllers
     public class UserController : Controller
     {
         public readonly UserManager<User> _userManager;
-
+        public readonly RoleManager<Role> _roleManager;
         UserManagement userManagement = new UserManagement(new EfUserRepository());
         LogManager logManager = new LogManager(new EfLogRepository());
 
         
 
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager)
         {
             _userManager = userManager;
-
+            _roleManager = roleManager;
            
         }
 
@@ -51,19 +52,14 @@ namespace FuturecomApi.Controllers
         public async Task<IActionResult> ListUser()
         {
             
-           
-
-        
-
-         
-
-
             var users = userManagement.GetAllUser();
                 
-                return Ok(users);
+            return Ok(users);
           
 
         }
+
+
 
         [HttpGet]
         [Route("{userId}")]
@@ -84,30 +80,32 @@ namespace FuturecomApi.Controllers
 
 
         [HttpPost("adduser")]
+       
         public async Task<IActionResult> AddUser([FromBody] UserRegisterDto user)
         {
 
-            try
-            {
+           
                 var Iduser = userManagement.UserAdd(user);
                 var result = await _userManager.CreateAsync(Iduser, user.Password);
 
                 if (result.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(Iduser, user.Role);
-                    return Ok("Kullanıcı eklendi");
+                    await _userManager.AddToRoleAsync(Iduser, user.Role);
+
+                   var userid = await _userManager.GetUserIdAsync(Iduser);
+
+                    logManager.LogAdd(userid,"AU");
+
+                    return Ok("User Add");
                 }
                 else
                 {
                     return BadRequest(new {message="Bilgileri gözden geçirin"});
                 }
 
-            }
+            
 
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+          
 
         }
 
@@ -138,8 +136,8 @@ namespace FuturecomApi.Controllers
                 {
 
 
+                    logManager.LogAdd(request.Id, "CP");
 
-                   
                     return Ok("Password changed successfully");
 
 
@@ -158,8 +156,8 @@ namespace FuturecomApi.Controllers
 
 
         [HttpPut]
-        [Route("{userId}")]
-        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateDto userupdate)
+        [Route("adminupdate/{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateDto userUpdateDto)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -168,26 +166,82 @@ namespace FuturecomApi.Controllers
                 return NotFound();
             }
 
-          
-               
-                user.Email = userupdate.mail;
-                user.PhoneNumber = userupdate.phone;
 
-              
-                var result = await _userManager.UpdateAsync(user);
 
-          
-                if (result.Succeeded)
-                {
-                    await _userManager.UpdateSecurityStampAsync(user);
-                    return Ok();
-                }
-                else
-                {
-                   
-                    return StatusCode(500, "Error updating user");
-                }
+            user.FirstName = userUpdateDto.firstname;
+            user.LastName = userUpdateDto.surname; 
+            user.Email = userUpdateDto.mail;
+            user.PhoneNumber = userUpdateDto.phone;
+
+            var role = await _roleManager.FindByNameAsync(userUpdateDto.role);
+
+
+            if (role != null && user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, roles.ToArray());
+                await _userManager.AddToRoleAsync(user, role.Name);
             }
+
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                logManager.LogAdd(userId, "IU");
+                
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500, "Error updating user");
+            }
+
+       
+            }
+
+        [HttpPut]
+        [Route("normaluser/{userId}")]
+        public async Task<IActionResult> NormalUserUpdate(string userId, [FromBody] UserUpdateNormalDto userN)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+
+
+         
+            user.Email = userN.mail;
+            user.PhoneNumber = userN.phone;
+
+
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                logManager.LogAdd(userId, "IU");
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500, "Error updating user");
+            }
+
+
+        }
+
+
+
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> StatusUpdate()
+        {
+            return Ok();
+           
+        }
 
 
         [HttpDelete("delete/{userId}")]
@@ -196,6 +250,8 @@ namespace FuturecomApi.Controllers
             try
             {
                 userManagement.UserDelete(userId);
+
+                logManager.LogAdd(userId, "UD");
                 return Ok();
             }
             catch

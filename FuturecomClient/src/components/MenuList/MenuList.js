@@ -11,12 +11,17 @@ import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
+import BadgeIcon from '@mui/icons-material/Badge';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import {useNavigate} from "react-router-dom";
 
 export default function MenuList() {
  
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -24,41 +29,37 @@ export default function MenuList() {
 
   return (
     <List
-      sx={{height:'100%', width:'40vh',maxWidth: 360, backgroundColor: 'rgba(64, 64, 64, 0.1)'
+      sx={{ width:'40vh',maxWidth: 360, backgroundColor: 'rgba(64, 64, 64, 0.1)'
       
        }}
       component="nav"
       aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader" sx={{backgroundColor: 'rgba(255,255,255,0.2)'}}>
-          Nested List Items
-        </ListSubheader>
-      }
+      
     >
       <ListItemButton>
         <ListItemIcon>
-          <SendIcon />
+          <SyncAltIcon />
         </ListItemIcon>
         <ListItemText primary="Logs" sx={{color:'white'}} onClick={()=>navigate('/loglist')}/>
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
-          <DraftsIcon />
+          <BadgeIcon />
         </ListItemIcon>
-        <ListItemText primary="Drafts" />
+        <ListItemText primary="Roles" sx={{color:'white'}} />
       </ListItemButton>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <InboxIcon />
+        <ManageAccountsIcon/>
         </ListItemIcon>
-        <ListItemText primary="User Management" />
+        <ListItemText primary="User Management" sx={{color:'white'}} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <StarBorder/>
+              <PersonAddIcon/>
             </ListItemIcon>
             <ListItemText primary="Add New User" sx={{color:'white'}} onClick={()=>navigate('/adduser')} />
             
@@ -66,7 +67,7 @@ export default function MenuList() {
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <StarBorder/>
+              <RecentActorsIcon/>
             </ListItemIcon>
             <ListItemText primary="User List" sx={{color:'white'}} onClick={()=>navigate('/listuser')} />
             

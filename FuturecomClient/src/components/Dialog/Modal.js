@@ -1,5 +1,5 @@
 // Modal component
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,14 +12,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Modal = ({ open, onClose,header,message }) => {
+const Modal = ({ open,onClose,header,message,id }) => {
+  const [durum, setDurum] = useState(open);
+
   const handleClose = () => {
-    onClose(); // Call the onClose function passed as prop to close the modal
+    setDurum(false); // Modal kapatmak için durum state'ini false yap
+    onClose(); // onClose prop'u aracılığıyla, modal kapatıldığında çalıştırılacak fonksiyonu çağır
   };
+
+  useEffect(() => {
+    setDurum(open); // open prop'u değiştiğinde durum state'ini güncelle
+  }, [open]);
+
 
   return (
     <Dialog
-      open={open}
+      open={durum}
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
@@ -29,6 +37,7 @@ const Modal = ({ open, onClose,header,message }) => {
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           {message}
+
         </DialogContentText>
       </DialogContent>
       <DialogActions>

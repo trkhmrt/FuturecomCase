@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 
 
+
 const LogListing = () => {
 
 
@@ -10,8 +11,14 @@ const LogListing = () => {
 
   useEffect(() => {
     async function fetchData() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+          id:localStorage.getItem('userId')
+        }
+      };
       try {
-        const response = await axios.get("https://localhost:7069/Log");
+        const response = await axios.get("https://localhost:7069/Log",config);
         setList(response.data);
       } catch (error) {
         console.error(error.message);
@@ -19,7 +26,7 @@ const LogListing = () => {
     }
 
     fetchData();
-  }, [list]); 
+  },[]); 
 
   const columns = [
   

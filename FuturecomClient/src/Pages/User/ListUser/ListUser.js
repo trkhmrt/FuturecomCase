@@ -1,42 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Pagination from '@mui/material/Pagination';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import Switch from '@mui/material/Switch';
-import {useNavigate} from "react-router-dom";
+import {
+    React,
+    useState,
+    useEffect,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Pagination,
+    Button,
+    IconButton,
+    DeleteIcon,
+    EditIcon,
+    Switch,
+    Modal,
+    FormControlLabel,
+    FormControl,
+    FormGroup,
+    useNavigate,
+    axios
+  
+} from '../../CustomImports/CustomImports.js';
 
 export default function ListUser() {
+  const [isSwitchOn, setIsSwitchOn] = useState(true);
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState([]);
+  const [open,setOpen] = useState(false)
+  const [token,setToken] = useState('')
   const rowsPerPage = 5;
   const navigate=useNavigate()
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accesstoken')}`,
+      id:localStorage.getItem('userId')
+    }
+  };
+
+  const handleModalOpen = (id) => {
+    setOpen(true);
+  };
+
+  const handleModalClose = (id) => {
+    setOpen(false);
+  };
+
+
 
 
   useEffect(() => {
-    fetchData();
-  }, []); // Fetch data on initial render
+ 
+
+   fetchData() 
+   
+  }, []); 
 
   const fetchData = async () => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
-          id:localStorage.getItem('userId')
-        }
-      };
       const response = await axios.get('https://localhost:7069/User/listuser',config);
       setUserData(response.data);
-      console.log(response.data)
+    
+
+      
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -44,10 +72,11 @@ export default function ListUser() {
 
   const handleDeleteUser = async (userId) => {
     try {
-      const response = await axios.delete(`https://localhost:7069/User/delete/${userId}`);
+
+      const response = await axios.delete(`https://localhost:7069/User/delete/${userId}`,config);
 
       if (response.status === 200) {
-        // User deleted successfully
+        
         setUserData(userData.filter((user) => user.id !== userId));
       } else {
         console.error('Error deleting user:', response.data);
@@ -62,7 +91,7 @@ export default function ListUser() {
   };
 
   const handleEditClick = (userId) => {
-    navigate(`/userinfo/${userId}`); // Navigate using useNavigate
+    navigate(`/userinfo/${userId}`); 
   };
 
   return (
@@ -72,31 +101,41 @@ export default function ListUser() {
           <TableHead>
             <TableRow>
               <TableCell>Username</TableCell>
-              <TableCell align="right">First Name</TableCell>
-              <TableCell align="right">Last Name</TableCell>
+              <TableCell align="center">First Name</TableCell>
+              <TableCell align="center">Last Name</TableCell>
               <TableCell align="center">Email</TableCell>
-              <TableCell align="right">Phone</TableCell>
+              <TableCell align="center">Phone</TableCell>
             
             
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Delete</TableCell>
-              <TableCell align="right">Edit</TableCell>
+              <TableCell align="center">Status</TableCell>
+              <TableCell align="center">Delete</TableCell>
+              <TableCell align="center">Edit</TableCell>
            
             </TableRow>
           </TableHead>
           <TableBody >
             {userData.slice((page - 1) * rowsPerPage, page * rowsPerPage).map((user) => (
+              
               <TableRow key={user.id} style={{ backgroundColor: user.status === false ? 'red' : 'inherit'}}>
                 <TableCell component="th" scope="row">
                   {user.userName}
                 </TableCell>
-                <TableCell align="right">{user.firstName}</TableCell>
-                <TableCell align="right">{user.lastName}</TableCell>
-                <TableCell align="right">{user.email}</TableCell>
-                <TableCell align="right">{user.phoneNumber}</TableCell>
+                <TableCell align="center">{user.firstName}</TableCell>
+                <TableCell align="center">{user.lastName}</TableCell>
+                <TableCell align="center">{user.email}</TableCell>
+                <TableCell align="center">{user.phoneNumber}</TableCell>
                 
               
-                <TableCell align="right">{user.status===false ? <p>Passive</p> : <p>Active</p>}</TableCell>
+                <TableCell align="right">
+                    
+                    <FormControlLabel
+                      value="top"
+                      control={<Switch color="primary" />}
+                      label="Top"
+                      labelPlacement="end"
+                      
+                    />
+                </TableCell>
 
                 <TableCell align="right">  
                 <IconButton aria-label="delete" size="large" onClick={() => handleDeleteUser(user.id)}>
@@ -104,9 +143,12 @@ export default function ListUser() {
                 </IconButton>
                 </TableCell>
                 
-                <TableCell align="right" onClick={()=>handleEditClick(user.id)}><EditNoteIcon></EditNoteIcon></TableCell>
+                <TableCell align="right" onClick={()=>handleEditClick(user.id)}>
+                  <IconButton  >
+                  <EditIcon></EditIcon>
+                  </IconButton>
+                  </TableCell>
                 
-               
               </TableRow>
             ))}
           </TableBody>
@@ -120,6 +162,8 @@ export default function ListUser() {
           sx={{ justifyContent: 'center', mt: 2 }}
         />
       </div>
+     
+     
     </div>
   );
 }

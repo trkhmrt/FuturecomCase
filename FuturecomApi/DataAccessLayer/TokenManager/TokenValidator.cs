@@ -26,7 +26,7 @@ namespace DataAccessLayer.TokenManager
                 ValidateLifetime = true, 
                 
             };
-            
+
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -35,17 +35,17 @@ namespace DataAccessLayer.TokenManager
 
 
 
-                
 
-               
-                //Buralara id ve role gelecek unutma.
+
+
+                
                 return (true);
 
             }
             catch (SecurityTokenException ex)
             {
-               
-                Console.WriteLine($"Token validation failed: {ex.Message}");
+
+              
                 return (false);
             }
         }

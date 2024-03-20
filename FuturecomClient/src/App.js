@@ -1,6 +1,6 @@
 import './App.css';
-import NotFound from './Pages/ErrorPages/404'
 import Home from './Pages/Home/Home';
+import NotFound from './Pages/ErrorPages/404'
 import Yetki from './Pages/ErrorPages/403'
 import Login from './Pages/LoginScreen/Login';
 import Adduser from './Pages/User/AddUser/AddUser';
@@ -17,64 +17,45 @@ function App() {
 
   const [role,setRole]= useState(localStorage.getItem('role'))
  
-  
+  const [token,setToken]= useState(localStorage.getItem(''))
  
 useEffect(()=>{
    
 setRole(localStorage.getItem('role'))
-  
-},[role])
+setToken(localStorage.getItem('accesstoken'))
+},[role,token])
 
-const [countdown, setCountdown] = useState(3 * 60); // 3 dakika * 60 saniye
-/*
-useEffect(() => {
-  const timer = setInterval(() => {
-    setCountdown((prevCountdown) => {
-      if (prevCountdown === 0) {
-        clearInterval(timer);
-        alert("Süreniz doldu!");
-      }
-      return prevCountdown - 1;
-    });
-  }, 1000);
 
-  return () => clearInterval(timer);
-}, []);
-*/
-useEffect(()=>{
-
-})
-const formatCountdown = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-};
 
   return (
-    
- 
-      <Router>
-       <Routes>
-       
-       <Route  index path="/Login"  element={<Login/>}></Route>
+    <>
+     
+   
+     
+      
+      <Routes>
+        <Route  exact >
+          <Route index  path="/"  element={<Login/>}/>
         <Route  element={<Layout/>}>
-        <Route path="/home" element={<Home/>}></Route>
-        <Route  path="/listuser" element={<ListUser/>}></Route>
-        <Route  path="/adduser" element={<Adduser/>}></Route> 
-        <Route  path="/myprofile" element={<MyProfile/>}></Route> 
-        <Route  path="/userinfo/:id" element={<AdminUserInfo/>}></Route> 
-        <Route   path="/loglist" element={role==='Admin' ? <LogListing/> : 
-       <Navigate to="/403" />}></Route>
-       <Route path="/changepassword" element={<ChangePassword/>}></Route>
+          <Route path="/home" element={<Home/>}></Route>
+          <Route  path="/listuser" element={<ListUser/>}></Route>
+          <Route  path="/adduser" element={<Adduser/>}></Route> 
+          <Route  path="/myprofile" element={<MyProfile/>}></Route> 
+          <Route  path="/userinfo/:userId" element={<AdminUserInfo/>}></Route> 
+          
+          <Route   path="/loglist" element={role==='Admin' ? <LogListing/> : 
+          <Navigate to="/403" />}></Route>
+          <Route path="/changepassword" element={<ChangePassword/>}></Route>
         </Route>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/403" element={<Yetki/>}></Route>
+
+          <Route path="*" element={<NotFound />} />
+          <Route path="/403" element={<Yetki/>}></Route>
+          </Route>
         </Routes>
  
-        
-       
-      </Router>
-    
+
+     
+      </>
   );
 }
 

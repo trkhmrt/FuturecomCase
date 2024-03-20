@@ -19,7 +19,7 @@ namespace FuturecomApi.Controllers
 
         LogManager logManager = new LogManager(new EfLogRepository());
 
-        // GET: api/values
+      
         [HttpGet]
 
         public async Task<IActionResult> Get()

@@ -5,12 +5,45 @@ import axios from 'axios';
 import Snackbar from '../../../components/Snackbar/Snackbar';
 
 const PasswordValidator = () => {
+  const [token,setToken] = useState('')
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackmessage, setSnackmessage] = useState('');
   const [messagetype, setMessageType] = useState('');
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+      id:localStorage.getItem('userId')
+    }
+  };
+
+  const checkToken = async ()=>{
+  
+    const features={
+
+     refreshtoken:localStorage.getItem('refreshtoken'),
+     accesstoken:localStorage.getItem('accesstoken'),
+     userId:localStorage.getItem('userId')
+    }
+  
+  
+   
+   
+   const response = await axios.post(`https://localhost:7069/token/checktoken`,features,config)
+  
+   if(response.status==200)
+   {
+
+   }
+    localStorage.removeItem('accesstoken')
+    const t=localStorage.setItem('accesstoken',response.data)
+    setToken(t)
+   
+ }
+
 
   const handleChangeCurrentPassword = (e) => {
     setCurrentPassword(e.target.value);
@@ -32,6 +65,9 @@ const PasswordValidator = () => {
   };
 
   const handleSubmit = async (e) => {
+    
+    checkToken()
+
     e.preventDefault();
 
     const consecutiveCharsRegex = /012|123|234|345|456|567|678|789|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz|ABC|BCD|CDE|DEF|EFG|FGH|GHI|HIJ|IJK|JKL|KLM|LMN|MNO|NOP|OPQ|PQR|QRS|RST|STU|TUV|UVW|VWX|WXY|XYZ/;

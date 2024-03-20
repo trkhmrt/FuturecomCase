@@ -3,13 +3,7 @@ namespace BusinessLayer.Abstract.IGenericLogServices
 {
     public interface IGenericLogService<T>
     {
-        void LoginLogAdd(string token,string id);
-
-        void ChangePasswordLogAdd(string token, string id);
-
-        void LogOutAdd(string token, string id);
-
-
+        bool LogAdd(string id,string request);
 
         ICollection<T> GetAllLog();
 

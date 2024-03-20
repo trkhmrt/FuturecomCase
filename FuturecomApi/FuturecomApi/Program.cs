@@ -23,7 +23,7 @@ public class Program
         //Identity'nin projeye dahil edilmesi
         builder.Services.AddDbContext<Context>();
 
-        builder.Services.AddIdentity<User, IdentityRole>()
+        builder.Services.AddIdentity<User, Role>()
        .AddEntityFrameworkStores<Context>()
        .AddDefaultTokenProviders();
 
@@ -74,14 +74,14 @@ public class Program
         });
 
 
-
+        builder.Services.AddAuthorization();
+        builder.Services.AddAuthentication();
         builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
-        builder.Services.AddAuthorization();
-        builder.Services.AddTransient<GlobalTokenHandler>();
-        builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
-        builder.Services.AddTransient<SeedData>();
-        
+      
+
+      builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+     
 
         var app = builder.Build();
 
@@ -99,15 +99,20 @@ public class Program
        
 
 
-            app.UseAuthorization();
+        app.UseAuthorization();
         app.UseAuthentication();
 
 
         //GLobalhandling
+         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
         
-        app.UseMiddleware<GlobalTokenHandler>();
-        app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
-      
+        
+
+
+
+
+
+
 
 
         app.MapControllers();

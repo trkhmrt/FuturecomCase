@@ -19,18 +19,18 @@ namespace DataAccessLayer.Concrete
         {
             base.OnModelCreating(modelBuilder);
 
-            // Rol tablosuna seed data ekle
+           
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "1", Name = "admin", NormalizedName = "ADMIN" },
                 new IdentityRole { Id = "2", Name = "normaluser", NormalizedName = "NORMALUSER" }
             );
 
-            // Kullanıcı tablosuna seed data ekle
+         
             var hasher = new PasswordHasher<User>();
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = "1",
-                UserName = "admin",
+                UserName = "Admin",
                 NormalizedUserName = "ADMIN",
                 Email = "admin@example.com",
                 NormalizedEmail = "ADMIN@EXAMPLE.COM",
@@ -41,10 +41,10 @@ namespace DataAccessLayer.Concrete
                 Status = true
             });
 
-            // Kullanıcının rolünü ata
+           
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string> { RoleId = "1", UserId = "1" } // admin rolü
-                // Diğer roller için buraya ekleyebilirsiniz
+                new IdentityUserRole<string> { RoleId = "1", UserId = "1" } 
+             
             );
         }
 

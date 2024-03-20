@@ -94,10 +94,7 @@ namespace DataAccessLayer.Repositories
          var  result = _context.Users.FirstOrDefault(u => u.Id == user.id);
             if (result != null)
             {
-                if(user.Status!=result.Status)
-                {
-                    result.Status = user.Status;
-                }
+               
 
                 result.Email = user.mail;
                 result.PhoneNumber = user.phone;

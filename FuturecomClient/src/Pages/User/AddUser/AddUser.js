@@ -11,6 +11,7 @@ import axios from 'axios';
 import Snackbar from '../../../components/Snackbar/Snackbar';
 
 const AddUser = () => {
+    const [token,setToken] = useState('')
     const [firstName, setFirstName] = useState('');
     const [surname, setSurname] = useState('');
     const [username, setUsername] = useState('');
@@ -22,6 +23,39 @@ const AddUser = () => {
     const [snackmessage,setSnackmessage] = useState('')
     const [messagetype,setMessageType] = useState('')
 
+
+    const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+          id:localStorage.getItem('userId')
+        }
+      };
+
+
+    const checkToken = async ()=>{
+  
+        const features={
+   
+         refreshtoken:localStorage.getItem('refreshtoken'),
+         accesstoken:localStorage.getItem('accesstoken'),
+         userId:localStorage.getItem('userId')
+        }
+      
+      
+       
+       
+       const response = await axios.post(`https://localhost:7069/token/checktoken`,features,config)
+      
+       if(response.status==200)
+       {
+   
+       }
+        localStorage.removeItem('accesstoken')
+        const t=localStorage.setItem('accesstoken',response.data)
+        setToken(t)
+       
+     }
+    
     const handleChange = (event) => {
         setRole(event.target.value);
     };
@@ -36,6 +70,13 @@ const AddUser = () => {
     }
 
     const addUser = async () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('refreshtoken')}`,
+              id:localStorage.getItem('userId')
+            }
+          };
+
         const user = {
             FirstName: firstName,
             LastName: surname,
@@ -47,7 +88,7 @@ const AddUser = () => {
         };
 
         try {
-            const response = await axios.post("https://localhost:7069/User/adduser", user);
+            const response = await axios.post("https://localhost:7069/User/adduser", user,config);
             if(response.status===200){
               handleSnack(true,'Kayıt BAŞARILI','success')
             }

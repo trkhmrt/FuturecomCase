@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   const handleCloseModal = () => {
-    setControl(false); // Close the modal by setting kontrol state to false
+    setControl(false);
   };
 
   const handleLogin = async () => {
@@ -59,10 +59,17 @@ const Login = () => {
                     setControl(true)
                   }
                   else{
+                    const config = {
+                      headers: {
+                        username: username,
+                        password:password,
+                       
+                      }
+                    };
                    const response = await axios.post('https://localhost:7069/auth/login', {
                         UserName: username,
                         Password: password,
-                      });
+                      },config);
                    
                      if(response.status==200)
                      {
@@ -118,7 +125,7 @@ const Login = () => {
                       }
                      else if(error.response==200)
                      {
-                       navigate('/anasayfa')
+                       navigate('/home')
                      }
                       else {
                         
@@ -147,7 +154,7 @@ const Login = () => {
     <LoginPage style={{ height: '100vh' }}>
       <form onSubmit={handleSubmit}>
         <Username value={username} onChange={handleUsername}></Username>
-        <Modal open={control} onClose={handleCloseModal} header={header} message={message} /> {/* Pass handleCloseModal function */}
+        <Modal open={control} onClose={handleCloseModal} header={header} message={message} /> 
         <Password value={password} onChange={handlePassword}></Password>
         <Submit type="submit" onClick={handleSubmit}>
           Login

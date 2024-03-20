@@ -31,10 +31,10 @@ namespace FuturecomApi.Middlewares
         {
             try
             {
+
+
                 await next(context);
-
-
-
+               
 
             }
           
@@ -57,14 +57,13 @@ namespace FuturecomApi.Middlewares
 
 
 
-
-            
-
-           
            
 
 
-            
+
+
+
+
         }
     }
 }
