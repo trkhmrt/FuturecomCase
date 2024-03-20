@@ -15,12 +15,19 @@ Yeni bir terminal açarak
 3- npm start
 
 
-2-Veritabanı backup dosyasının yüklenmesi;
+2-Veritabanı
 
-Klasör içerisinde bulunan Futurecom.bak dosyasını veritabanında restore yaparak yükleyin.
+Code First yöntemi kullanılarak ayağa kaldıralacaktır.
 
+Bunun için Visual Studio içerisinden terminali açarak sırasıyla;
 
-3-Backend Projesinin Çalıştırılması
+1-)dotnet ef migrations add [isim]
+
+2-)dotnet ef database update
+
+Not: Bu işlem sonucunda veri tabanına admin rolünde bir kullanıcı eklenecektir.
+
+3-Projesinin Çalıştırılması
 
 Visual studio içerisinde proje açıldıktan sonra;
 
@@ -31,14 +38,11 @@ Visual studio içerisinde proje açıldıktan sonra;
 ardından projeye start verin.
 
 
-----Giriş Bilgileri---
+-Kullanıcı Bilgileri-
 ADMIN
-kullanıcı adı:admin 
-şifre:  Abc_123456
 
-User
-kullanıcı adı: normaluser
-şifre:  Abc_123456
+kullanıcı adı:admin 
+şifre:  1234567
 
 
 
