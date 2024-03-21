@@ -12,4 +12,3 @@
 /Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/obj/Debug/net7.0/EntityLayer.pdb
 /Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/obj/Debug/net7.0/EntityLayer.genruntimeconfig.cache
 /Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/obj/Debug/net7.0/ref/EntityLayer.dll
-/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/obj/Debug/net7.0/EntityLayer.sourcelink.json

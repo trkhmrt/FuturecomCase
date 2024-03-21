@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Concrete
 {
-	public class Context:IdentityDbContext<User>
+	public class Context:IdentityDbContext<User,Role,string>
 	{
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
