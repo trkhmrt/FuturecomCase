@@ -14,13 +14,6 @@ const Login = () => {
   const [message,setMessage] = useState('')  
   const [header,setHeader] = useState('')  
   const navigate = useNavigate();
-  const config = {
-    headers: {
-      username: username,
-      password:password,
-     
-    }
-  };
 
   const isFieldEmpty = (field) => {
     return field.trim() == '';
@@ -38,77 +31,115 @@ const Login = () => {
   const handleCloseModal = () => {
     setControl(false);
   };
-  
 
   const handleLogin = async () => {
-    if (isFieldEmpty(username) && !isFieldEmpty(password)) {
-      setHeader("UYARI");
-      setMessage("Kullanıcı adı boş geçilemez");
-      setControl(true);
-    } else if (!isFieldEmpty(username) && isFieldEmpty(password)) {
-      setHeader("UYARI");
-      setMessage("Şifre boş geçilemez");
-      setControl(true);
-    } else if (isFieldEmpty(username) && isFieldEmpty(password)) {
-      setHeader("UYARI");
-      setMessage("Kullanıcı adı ve şifre boş geçilemez");
-      setControl(true);
-    } else {
-      try {
-        const response = await axios.post('https://localhost:7069/auth/login', {
-          UserName: username,
-          Password: password,
-        }, config);
   
-        if (response.status === 200) {
-          console.log(response.data.refreshToken);
-  
-          const token = response.data.accessToken;
-          const refreshToken = response.data.refreshToken;
-          localStorage.setItem("accesstoken", token);
-          localStorage.setItem("refreshtoken", refreshToken);
-          const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
-  
-          const userId = decodedToken.id;
-          const role = decodedToken.role;
-          const firstName = decodedToken.name;
-          const lastName = decodedToken.lastname;
-          const expDateInSeconds = decodedToken.exp;
-          const expDate = new Date(expDateInSeconds * 1000);
-          const expMinutes = expDate.getMinutes();
-  
-          localStorage.setItem('userId', userId);
-          localStorage.setItem('role', role);
-          localStorage.setItem('firstname', firstName);
-          localStorage.setItem('lastname', lastName);
-          localStorage.setItem('exp', expDate);
-          localStorage.setItem('minute', expMinutes);
-  
-          navigate('/home');
-        } 
        
        
-      } 
-      catch (error) {
-       
-        if (error.response) {
-         
-          setHeader("HATA");
-          setMessage("İstek hatası");
-          setControl(true);
           
-        } 
-        if (error.response.status === 401) {
-          setHeader("HATA");
-          setMessage("Kullanıcı Bulunamadı");
-          setControl(true);
-        }
-       
-      }
-    }
-  };
-  
+           
+              try {
+                if (isFieldEmpty(username) && !isFieldEmpty(password)) 
+                  {
+                    setHeader("UYARI")
+                    setMessage("Kullanıcı adı boş geçilemez")
+                    setControl(true)
+                     
+                  }
+                  else if(!isFieldEmpty(username) && isFieldEmpty(password) ) 
+                  {
+                    setHeader("UYARI")
+                    setMessage("Şifre boş geçilemez")
+                    setControl(true)
+                  }
+                  else if(isFieldEmpty(username) && isFieldEmpty(password) )
+                  {
+                    setHeader("UYARI")
+                    setMessage("Kullanıcı adı ve şifre boş geçilemez")
+                    setControl(true)
+                  }
+                  else{
+                    const config = {
+                      headers: {
+                        username: username,
+                        password:password,
+                       
+                      }
+                    };
+                   const response = await axios.post('https://localhost:7069/auth/login', {
+                        UserName: username,
+                        Password: password,
+                      },config);
+                   
+                     if(response.status==200)
+                     {
+                      
+                      
+                      console.log(response.data.refreshToken)
+
+                      const token = response.data.accessToken
+                      const refreshtoken = response.data.refreshToken
+                      localStorage.setItem("accesstoken",token)
+                      localStorage.setItem("refreshtoken",refreshtoken)
+                      const decodedToken = jwtDecode(token);
+                      console.log(decodedToken)
+                     
+                      const userId = decodedToken.id; 
+                      const role = decodedToken.role; 
+                      const firstName = decodedToken.name; 
+                      const lastName = decodedToken.lastname; 
+                      const expDateInSeconds = decodedToken.exp;
+                      const expDate = new Date(expDateInSeconds * 1000);
+                      const expMinutes = expDate.getMinutes()
+
+                      
+                      localStorage.setItem('userId',userId)
+                      localStorage.setItem('role',role)
+                      localStorage.setItem('firstname',firstName)
+                      localStorage.setItem('lastname',lastName)
+                      localStorage.setItem('exp',expDate)
+                      localStorage.setItem('minute',expMinutes)
+
+
+                         
+
+
+                        
+                        navigate('/home')
+                     } 
+                  }
+               
+              
+                }
+                catch (error) {
+                    if (error.response) {
+                        
+                        setHeader(error.response.data.message)
+                        setMessage("Kullanıcı adı veya parola hatalı")
+                        setControl(true);
+                      } 
+                      else if (error.request) {
+                        setHeader("SERVER HATASI")
+                        setMessage(`İstek yapıldı, ancak yanıt alınamadı ${error.request}`)
+                        setControl(true);
+                      }
+                     else if(error.response==200)
+                     {
+                       navigate('/home')
+                     }
+                      else {
+                        
+                        console.log('İstek yapılamadı:', error.message);
+                      } 
+                    
+                }
+                
+                
+                  
+                
+          }
+     
+        
      
   
 

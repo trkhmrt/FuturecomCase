@@ -43,12 +43,14 @@ namespace FuturecomApi.Controllers
 
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
-            var userid = await _userManager.GetUserIdAsync(user);
-
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                return NotFound("Kullanıcı bulunamadı veya parola yanlış.");
+                return Unauthorized("Oturum açma başarısız");
             }
+
+            var userid = await _userManager.GetUserIdAsync(user);
+
+          
 
 
             var role = await _userManager.GetRolesAsync(user);
@@ -57,12 +59,13 @@ namespace FuturecomApi.Controllers
             var result = await _signInManager.PasswordSignInAsync(loginDto.UserName, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
 
-           
+
 
             if (!result.Succeeded)
             {
-               
-                return BadRequest("Oturum açma başarısız");
+
+                return Unauthorized("Oturum açma başarısız");
+
             }
 
 

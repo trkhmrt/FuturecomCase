@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{54ADF810-4C44-4358-B4CE-CCE59311D234}|https">
   <MonoDevelop.Ide.ItemProperties.FuturecomApi PreferredExecutionTarget="/Applications/Brave Browser.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/UserController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../DataAccessLayer/Concrete/Context.cs">
     <Files>
-      <File FileName="../DataAccessLayer/Concrete/Context.cs" Line="54" Column="1" />
-      <File FileName="../EntityLayer/Concrete/User.cs" Line="12" Column="1" />
+      <File FileName="../DataAccessLayer/Concrete/Context.cs" Line="25" Column="55" />
+      <File FileName="../EntityLayer/Concrete/User.cs" />
       <File FileName="Properties/launchSettings.json" />
-      <File FileName="Program.cs" />
-      <File FileName="Controllers/AuthController.cs" Line="79" Column="1" />
-      <File FileName="../BusinessLayer/Concrete/LogManager.cs" />
+      <File FileName="Program.cs" Line="27" Column="44" />
+      <File FileName="Controllers/AuthController.cs" Line="41" Column="10" />
+      <File FileName="../BusinessLayer/Concrete/LogManager.cs" Line="1" Column="1" />
       <File FileName="../DataAccessLayer/EntityFramework/EfLogRepository.cs" />
       <File FileName="../DataAccessLayer/EntityFramework/EfUserRepository.cs" />
       <File FileName="../DataAccessLayer/Repositories/GenericUserRepository.cs" />
@@ -18,9 +18,9 @@
       <File FileName="Controllers/LogController.cs" Line="22" Column="7" />
       <File FileName="../DtoLayer/UserDtos/UserPasswordDto.cs" />
       <File FileName="../DtoLayer/UserDtos/UserLogoutDto.cs" />
-      <File FileName="../BusinessLayer/Concrete/UserManagement.cs" />
+      <File FileName="../BusinessLayer/Concrete/UserManagement.cs" Line="1" Column="1" />
       <File FileName="Middlewares/GlobalExceptionHandlingMiddleware.cs" Line="67" Column="1" />
-      <File FileName="Controllers/UserController.cs" Line="242" Column="1" />
+      <File FileName="Controllers/UserController.cs" Line="34" Column="67" />
       <File FileName="../DataAccessLayer/Repositories/GenericLogRepository.cs" />
       <File FileName="../EntityLayer/Concrete/Error.cs" />
       <File FileName="appsettings.json" />
@@ -33,8 +33,8 @@
       <File FileName="../DataAccessLayer/TokenManager/RefreshTokenManager.cs" />
       <File FileName="../DataAccessLayer/TokenManager/TokenValidator.cs" />
       <File FileName="../DataAccessLayer/TokenManager/AccessTokenGenerator.cs" />
-      <File FileName="Controllers/TokenController.cs" />
-      <File FileName="../EntityLayer/Concrete/UserLog.cs" Line="16" Column="41" />
+      <File FileName="Controllers/TokenController.cs" Line="1" Column="1" />
+      <File FileName="../EntityLayer/Concrete/UserLog.cs" />
       <File FileName="../DataAccessLayer/Abstract/IGenericLog/IGenericLogDal.cs" />
       <File FileName="../DataAccessLayer/Abstract/IGenericLog/ILogDal.cs" />
       <File FileName="../DtoLayer/TokenDtos/TokenDto.cs" />
@@ -45,20 +45,21 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Futurecom" expanded="True">
-            <Node name="DataAccessLayer">
+            <Node name="BusinessLayer" expanded="True">
+              <Node name="Concrete" expanded="True" />
+            </Node>
+            <Node name="DataAccessLayer" expanded="True">
               <Node name="Concrete" expanded="True" />
             </Node>
             <Node name="DtoLayer" expanded="True">
               <Node name="LoginDtos" expanded="True" />
               <Node name="TokenDtos" expanded="True" />
             </Node>
-            <Node name="EntityLayer" expanded="True">
+            <Node name="EntityLayer">
               <Node name="Concrete" expanded="True" />
             </Node>
             <Node name="FuturecomApi">
-              <Node name="Controllers" expanded="True">
-                <Node name="UserController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Middlewares" expanded="True" />
             </Node>
           </Node>
@@ -79,7 +80,6 @@
       <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Middlewares/GlobalTokenHandler.cs" relfile="Middlewares/GlobalTokenHandler.cs" line="20" column="1" />
       <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Middlewares/AuthenticationMiddleware.cs" relfile="Middlewares/AuthenticationMiddleware.cs" line="33" column="1" />
       <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/TokenController.cs" relfile="Controllers/TokenController.cs" line="42" column="1" />
-      <Breakpoint file="/Users/tarikhamarat/Desktop/FuturecomApi/FuturecomApi/Controllers/AuthController.cs" relfile="Controllers/AuthController.cs" line="39" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

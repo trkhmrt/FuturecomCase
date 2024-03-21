@@ -10,3 +10,4 @@
 /Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/obj/Debug/net7.0/refint/DtoLayer.dll
 /Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/obj/Debug/net7.0/DtoLayer.pdb
 /Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/obj/Debug/net7.0/ref/DtoLayer.dll
+/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/obj/Debug/net7.0/DtoLayer.sourcelink.json

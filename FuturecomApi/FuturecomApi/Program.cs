@@ -23,7 +23,7 @@ public class Program
         //Identity'nin projeye dahil edilmesi
         builder.Services.AddDbContext<Context>();
 
-        builder.Services.AddIdentity<User, Role>()
+        builder.Services.AddIdentity<User,IdentityRole>()
        .AddEntityFrameworkStores<Context>()
        .AddDefaultTokenProviders();
 

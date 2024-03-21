@@ -156,7 +156,7 @@ namespace DataAccessLayer.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab3a80c1-1a9c-47e2-8163-dac0cec0efd5",
+                            ConcurrencyStamp = "bdb88a4f-9880-45ff-87d7-285346b1e100",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -164,9 +164,9 @@ namespace DataAccessLayer.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIF4CkOS6cqtDTYzW+qhN8RbFnUPtjg3x5tZ9Cdsg22pxXQy4V5WVnkqp1S0W3/swg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKGtOLXdvJANd6X2zT7Un5rl4M++ZcErjjU8UAd+cM/vg2Y0L4mxDi2S6sRN6SuMVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6c2d16c1-4d88-45b3-b369-7f2041359cad",
+                            SecurityStamp = "4a60cead-1d49-4f3b-a23f-8cdf283b829b",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -203,7 +203,7 @@ namespace DataAccessLayer.Migrations
                         new
                         {
                             Id = "1",
-                            Name = "admin",
+                            Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new

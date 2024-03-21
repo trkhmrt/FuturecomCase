@@ -30,14 +30,14 @@ namespace FuturecomApi.Controllers
     public class UserController : Controller
     {
         public readonly UserManager<User> _userManager;
-        public readonly RoleManager<Role> _roleManager;
+        public readonly RoleManager<IdentityRole> _roleManager;
         UserManagement userManagement = new UserManagement(new EfUserRepository());
         LogManager logManager = new LogManager(new EfLogRepository());
 
         
 
 
-        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager)
+        public UserController(UserManager<User> userManager,RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;

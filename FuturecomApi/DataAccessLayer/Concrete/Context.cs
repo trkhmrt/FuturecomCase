@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Concrete
 {
-	public class Context:IdentityDbContext<User,Role,string>
+	public class Context:IdentityDbContext<User>
 	{
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -21,7 +21,7 @@ namespace DataAccessLayer.Concrete
 
            
             modelBuilder.Entity<IdentityRole>().HasData(
-                new IdentityRole { Id = "1", Name = "admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
                 new IdentityRole { Id = "2", Name = "normaluser", NormalizedName = "NORMALUSER" }
             );
 

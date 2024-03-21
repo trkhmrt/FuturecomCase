@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240318104030_Initial")]
+    [Migration("20240321103455_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -63,10 +63,6 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -163,7 +159,7 @@ namespace DataAccessLayer.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64badcd5-b207-4d6a-98cb-b8e67e68a8f8",
+                            ConcurrencyStamp = "bdb88a4f-9880-45ff-87d7-285346b1e100",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -171,12 +167,12 @@ namespace DataAccessLayer.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHidq0sEzkUpN63QCBee12LSI7wFe0WFQub9C37Rm/1bQjTR4hMNJ63x+rhZOAdaSg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKGtOLXdvJANd6X2zT7Un5rl4M++ZcErjjU8UAd+cM/vg2Y0L4mxDi2S6sRN6SuMVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8a5537b-ab22-4572-86db-aa85f964d6a0",
+                            SecurityStamp = "4a60cead-1d49-4f3b-a23f-8cdf283b829b",
                             Status = true,
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "Admin"
                         });
                 });
 
@@ -210,7 +206,7 @@ namespace DataAccessLayer.Migrations
                         new
                         {
                             Id = "1",
-                            Name = "admin",
+                            Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
