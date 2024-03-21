@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -237,11 +238,27 @@ namespace FuturecomApi.Controllers
 
 
         [HttpPut("status/{id}")]
-        public async Task<IActionResult> StatusUpdate()
+        public async Task<IActionResult> StatusUpdate(string id)
         {
-            return Ok();
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+           
+            user.Status = !user.Status;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            return Ok(); 
+
+           
            
         }
+
+      
 
 
         [HttpDelete("delete/{userId}")]

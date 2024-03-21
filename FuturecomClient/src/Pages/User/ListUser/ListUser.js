@@ -30,6 +30,8 @@ export default function ListUser() {
   const [userData, setUserData] = useState([]);
   const [open,setOpen] = useState(false)
   const [token,setToken] = useState('')
+  const [isChecked,setIsChecked] = useState(false)
+
   const rowsPerPage = 5;
   const navigate=useNavigate()
   const config = {
@@ -47,6 +49,23 @@ export default function ListUser() {
     setOpen(false);
   };
 
+  const statusHandle = async (id, status) => {
+    try {
+      const response = await axios.put(`https://localhost:7069/User/status/${id}`, config);
+      console.log(response);
+      const updatedUserData = userData.map(user => {
+        if (user.id === id) {
+          return { ...user, status: !status };
+        }
+        return user;
+      });
+      setUserData(updatedUserData);
+    
+    } catch (error) {
+      console.error('Error updating status', error);
+    }
+  };
+  
 
 
 
@@ -130,8 +149,8 @@ export default function ListUser() {
                     
                     <FormControlLabel
                       value="top"
-                      control={<Switch color="primary" />}
-                      label="Top"
+                      control={<Switch color="primary"   onChange={()=>statusHandle(user.id,user.status)} checked={user.status}    />}
+                      label={user.status ?'Active' : 'Passive'}
                       labelPlacement="end"
                       
                     />
