@@ -25,6 +25,12 @@ setRole(localStorage.getItem('role'))
 setToken(localStorage.getItem('accesstoken'))
 },[role,token])
 
+useEffect(()=>{
+   
+  setRole(localStorage.getItem('role'))
+  setToken(localStorage.getItem('accesstoken'))
+  },[])
+
 
 
   return (

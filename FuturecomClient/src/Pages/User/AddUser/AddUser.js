@@ -119,9 +119,6 @@ const AddUser = () => {
                     value={role}
                     onChange={handleChange}
                 >
-                    <MenuItem value="TeamLead">Takım Lideri</MenuItem>
-                    <MenuItem value="TestUzmanı">Test Uzmanı</MenuItem>
-                    <MenuItem value="VeritabanıUzmanı">Veritabanı Uzmanı</MenuItem>
                     <MenuItem value="Admin">Admin</MenuItem>
                     <MenuItem value="NormalUser">Normal User</MenuItem>
                 </Select>
