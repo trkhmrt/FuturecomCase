@@ -38,6 +38,7 @@ const Login = () => {
   const handleCloseModal = () => {
     setControl(false);
   };
+  
 
   const handleLogin = async () => {
     if (isFieldEmpty(username) && !isFieldEmpty(password)) {
@@ -86,21 +87,23 @@ const Login = () => {
   
           navigate('/home');
         } 
+       
+       
       } 
       catch (error) {
-        
-        if(error.response.status===404)
-        {
-          setHeader("UYARI");
-          setMessage("Kullanıcı bulunamadı");
+       
+        if (error.response) {
+         
+          setHeader("HATA");
+          setMessage("İstek hatası");
+          setControl(true);
+          
+        } 
+        if (error.response.status === 401) {
+          setHeader("HATA");
+          setMessage("Kullanıcı Bulunamadı");
           setControl(true);
         }
-        else{
-          setHeader("SERVER HATASI");
-          setMessage(`Hata oluştu: ${error.message}`);
-          setControl(true);
-        }
-
        
       }
     }
