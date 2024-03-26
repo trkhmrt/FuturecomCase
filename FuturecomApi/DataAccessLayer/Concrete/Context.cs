@@ -1,6 +1,5 @@
 ﻿using System;
 using EntityLayer.Concrete;
-using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +18,16 @@ namespace DataAccessLayer.Concrete
         {
             base.OnModelCreating(modelBuilder);
 
-        
+            // Benzersiz GUID'ler oluştur
+            Guid adminRoleId = Guid.NewGuid();
+            Guid normalUserRoleid = Guid.NewGuid();
+            Guid adminUserId = Guid.NewGuid();
+            Guid normalUserId = Guid.NewGuid();
+
+            // Seed Roles
             modelBuilder.Entity<Role>().HasData(
-                new Role { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" },
-                new Role { Id = Guid.NewGuid(), Name = "NormalUser", NormalizedName = "NORMALUSER" }
+                new Role { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+                new Role { Id = normalUserRoleid, Name = "NormalUser", NormalizedName = "NORMALUSER" }
             );
 
             // Hash the password securely before storing it
@@ -32,22 +37,51 @@ namespace DataAccessLayer.Concrete
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
-                    Id = Guid.NewGuid(),
+                    Id = adminUserId,
                     UserName = "admin",
                     NormalizedUserName = "ADMIN",
-                    Email = "admin@example.com",
-                    NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                    Email = "trkhamarat@gmail.com",
+                    NormalizedEmail = "TRKHAMARAT@GMAIL.COM",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "12345678"),
+                    PasswordHash = hasher.HashPassword(null, "1234567"),
                     PhoneNumber = "553 769 63 62",
                     FirstName = "Tarik",
                     LastName = "Hamarat",
-                    Status = true,
-
+                    Status = true
                 }
+            );
 
-            ); ;
+            // Seed Normal User
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = normalUserId,
+                    UserName = "normaluser",
+                    NormalizedUserName = "NORMALUSER",
+                    Email = "user@example.com",
+                    NormalizedEmail = "USER@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "1234567"),
+                    PhoneNumber = "555 555 55 55",
+                    FirstName = "Normal",
+                    LastName = "User",
+                    Status = true
+                }
+            );
 
+            // Seed User Roles
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid>
+                {
+                    RoleId = adminRoleId,
+                    UserId = adminUserId
+                },
+                new IdentityUserRole<Guid>
+                {
+                    RoleId = normalUserRoleid,
+                    UserId = normalUserId
+                }
+            );
         }
 
         public DbSet<Error> Errors { get; set; }

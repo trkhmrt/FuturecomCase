@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Concrete;
+using DataAccessLayer.EfRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,19 +12,25 @@ using Microsoft.AspNetCore.Mvc;
 namespace FuturecomApi.Controllers
 {
     [Route("/[controller]")]
-    [AllowAnonymous]
+ 
     public class LogController : Controller
     {
 
-        //LogManager logManager = new LogManager(new EfLogRepository());
+        UserLogManager logManager = new UserLogManager(new EfUserLogRepo());
 
       
         [HttpGet("getlogs")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetLogs()
         {
-            
 
-            return Ok();
+           var logs = logManager.TGetList();
+            if(logs!=null)
+            {
+                return Ok(logs);
+            }
+
+            return BadRequest("Not Listing");
         }
 
       

@@ -26,7 +26,7 @@ namespace FuturecomApi.Controllers
 
         AccessTokenGenerator tokenGenerator = new AccessTokenGenerator();
         RefreshTokenManager refreshTokenManager = new RefreshTokenManager();
-       
+        UserLogManager logManager = new UserLogManager(new EfUserLogRepo());
 
 
         public AuthController(UserManager<User> userManager)
@@ -43,6 +43,7 @@ namespace FuturecomApi.Controllers
             
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
+ 
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 return Unauthorized("Oturum açma başarısız");
@@ -52,6 +53,8 @@ namespace FuturecomApi.Controllers
                 var role = await _userManager.GetRolesAsync(user);
                 var token = tokenGenerator.CreateToken(user, role[0]);
                 var refreshtoken = refreshTokenManager.CreateRefreshToken();
+
+                logManager.TInsert("SI", $"{user.Id}");
 
                 return Ok(new { AccessToken = token, RefreshToken = refreshtoken });
 
@@ -66,13 +69,14 @@ namespace FuturecomApi.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout([FromBody] UserLogoutDto logoutDto)
         {
-             var user = await _userManager.FindByIdAsync(logoutDto.id);
 
-             var userid = await _userManager.GetUserIdAsync(user);
+            var user = await _userManager.FindByIdAsync(logoutDto.id);
 
+            var userId = await _userManager.GetUserIdAsync(user);
 
+            logManager.TInsert("LO", $"{userId}");
 
-              return Ok();
+            return Ok();
             
            
         }

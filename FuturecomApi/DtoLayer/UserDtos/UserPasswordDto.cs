@@ -5,9 +5,9 @@ namespace DtoLayer.UserDtos
 	{
 		public string? Id { get; set; }
 
-		public string? CurrentPassword { get; set; }
+		public string? CurrentPw { get; set; }
 
-		public string? NewPassword { get; set; }
+		public string? NewPw { get; set; }
 
 		
 

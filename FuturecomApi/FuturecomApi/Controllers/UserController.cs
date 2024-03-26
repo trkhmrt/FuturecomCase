@@ -11,6 +11,7 @@ using AutoMapper;
 using BusinessLayer.Abstract.IGenericUserServices;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.EfRepositories;
 using DataAccessLayer.TokenManager;
 using DtoLayer.UserDtos;
 using EntityLayer.Concrete;
@@ -26,11 +27,12 @@ namespace FuturecomApi.Controllers
 
     
     [Route("/[controller]")]
-    [AllowAnonymous]
+  
     public class UserController : Controller
     {
         public readonly UserManager<User> _userManager;
         public readonly RoleManager<Role> _roleManager;
+        UserLogManager logManager = new UserLogManager(new EfUserLogRepo());
         Context context = new Context();
        
 
@@ -49,7 +51,7 @@ namespace FuturecomApi.Controllers
 
 
         [HttpGet("listuser")]
-    
+        [Authorize]
         public async Task<IActionResult> ListUser()
         {
 
@@ -78,9 +80,10 @@ namespace FuturecomApi.Controllers
 
 
 
-
+        //OK
         [HttpPost("adduser")]
-        public async Task<IActionResult> AddUser(UserRegisterDto user)
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> AddUser([FromBody] UserRegisterDto user)
         {
 
             User newUser = new User
@@ -101,6 +104,11 @@ namespace FuturecomApi.Controllers
 
                 if (roleAssign.Succeeded)
                 {
+
+
+
+                    logManager.TInsert("AU",$"{newUser.Id}");
+
                     return Ok("User add!");
                 }
             }
@@ -119,8 +127,7 @@ namespace FuturecomApi.Controllers
         [Route("changepw")]
         public async Task<IActionResult> ChangePassword([FromBody] UserPasswordDto request)
         {
-            try
-            {
+            
                 var user = await _userManager.FindByIdAsync(request.Id);
                 if (user == null)
                 {
@@ -128,18 +135,18 @@ namespace FuturecomApi.Controllers
                 }
 
 
-                if (!await _userManager.CheckPasswordAsync(user, request.CurrentPassword))
+                if (!await _userManager.CheckPasswordAsync(user, request.CurrentPw))
                 {
                     return BadRequest("Incorrect current password");
                 }
 
 
-                var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+                var result = await _userManager.ChangePasswordAsync(user, request.CurrentPw, request.NewPw);
                 if (result.Succeeded)
                 {
 
 
-                  //  logManager.LogAdd(request.Id, "CP");
+                    logManager.TInsert("CP", $"{user.Id}");
 
                     return Ok("Password changed successfully");
 
@@ -147,22 +154,19 @@ namespace FuturecomApi.Controllers
                 }
 
                 return BadRequest("Failed to change password");
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(500, "An error occurred while changing password");
-            }
+            
+           
         }
 
 
 
 
         [HttpPut]
-        [Route("adminupdate/{userId}")]
-        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateDto userUpdateDto)
+        [Route("adminupdate")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDto userUpdateDto)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+
+            var user = await _userManager.FindByNameAsync(userUpdateDto.UserName);
 
             if (user == null)
             {
@@ -171,28 +175,19 @@ namespace FuturecomApi.Controllers
 
 
 
-            user.FirstName = userUpdateDto.firstname;
-            user.LastName = userUpdateDto.surname; 
-            user.Email = userUpdateDto.mail;
-            user.PhoneNumber = userUpdateDto.phone;
-
-            var role = await _roleManager.FindByNameAsync(userUpdateDto.role);
+            user.FirstName = userUpdateDto.FirstName;
+            user.LastName = userUpdateDto.LastName; 
+            user.Email = userUpdateDto.Email;
+            user.PhoneNumber = userUpdateDto.PhoneNumber;
 
 
-            if (role != null && user != null)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                await _userManager.RemoveFromRolesAsync(user, roles.ToArray());
-                await _userManager.AddToRoleAsync(user, role.Name);
-            }
-
-
-            var result = await _userManager.UpdateAsync(user);
+            
+           var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-              //  logManager.LogAdd(userId, "IU");
-                
+
+                logManager.TInsert("UU", $"{user.Id}");
                 return Ok();
             }
             else
@@ -272,14 +267,18 @@ namespace FuturecomApi.Controllers
                 if(foundUser!=null)
                 {
                     await _userManager.DeleteAsync(foundUser);
-                   
+
+                    logManager.TInsert("UD",$"{foundUser.Id}");
+
+                    return Ok();
+
                 }
-                
-                // logManager.LogAdd(userId, "UD");
-               
-            
-           
-            return Ok();
+
+            return BadRequest("Delete Failed");
+
+
+
+
 
         }
 

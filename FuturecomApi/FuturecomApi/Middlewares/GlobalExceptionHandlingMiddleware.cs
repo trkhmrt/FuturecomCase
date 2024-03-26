@@ -14,8 +14,8 @@ namespace FuturecomApi.Middlewares
 	{
 
 
+        
 
-     
         private readonly Context _context;
 
 		public GlobalExceptionHandlingMiddleware(Context context)

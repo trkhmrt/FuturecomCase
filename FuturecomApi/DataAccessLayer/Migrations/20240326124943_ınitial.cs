@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class ınitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -201,14 +201,27 @@ namespace DataAccessLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0184f7a9-766b-40d5-a501-063704fa330c"), null, "NormalUser", "NORMALUSER" },
-                    { new Guid("bab2e40c-978d-4c85-adbd-a0e705a82e32"), null, "Admin", "ADMIN" }
+                    { new Guid("78b07f9f-fce4-4c7f-b8e7-9f0e7449d446"), null, "Admin", "ADMIN" },
+                    { new Guid("8b5bbf89-83de-450c-84c5-f6856c8c245f"), null, "NormalUser", "NORMALUSER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("13ef20be-e9b5-4049-86e0-821d3a903c3b"), 0, "a8438e81-d97b-46f6-82c4-2547971f44b6", "admin@example.com", true, "Tarik", "Hamarat", false, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEBllJVgafg0lJ5wCNe4gmec1UJkg7xq04qlrorI3Lg5/7D1PAz8WoyVbqBaL11ok2w==", "553 769 63 62", false, null, true, false, "admin" });
+                values: new object[,]
+                {
+                    { new Guid("0e7e8fb8-128a-4899-a03c-d4209158d21b"), 0, "57c663de-98fa-4487-9c1d-d8861fd58bc6", "user@example.com", true, "Normal", "User", false, null, "USER@EXAMPLE.COM", "NORMALUSER", "AQAAAAIAAYagAAAAEDYr6A2LlQnOC2yy72IpmrPB6QR4qMYtvsQVHxRIaqvWKgtnh0h60aEMCiN2ecO6HA==", "555 555 55 55", false, null, true, false, "normaluser" },
+                    { new Guid("39996e5a-7ffe-4fa6-aa92-2f517b6c82f0"), 0, "9cdf9f61-4991-4dfd-a377-c028333c4ad1", "trkhamarat@gmail.com", true, "Tarik", "Hamarat", false, null, "TRKHAMARAT@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEN9AASxu5vU7+tEr43FhQkG+NgHZMA9gGdFPGp1DzurVuJ3mgd2Uc7kVLfRNuTW/4A==", "553 769 63 62", false, null, true, false, "admin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("8b5bbf89-83de-450c-84c5-f6856c8c245f"), new Guid("0e7e8fb8-128a-4899-a03c-d4209158d21b") },
+                    { new Guid("78b07f9f-fce4-4c7f-b8e7-9f0e7449d446"), new Guid("39996e5a-7ffe-4fa6-aa92-2f517b6c82f0") }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

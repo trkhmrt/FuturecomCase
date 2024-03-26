@@ -79,13 +79,13 @@ namespace DataAccessLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bab2e40c-978d-4c85-adbd-a0e705a82e32"),
+                            Id = new Guid("78b07f9f-fce4-4c7f-b8e7-9f0e7449d446"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("0184f7a9-766b-40d5-a501-063704fa330c"),
+                            Id = new Guid("8b5bbf89-83de-450c-84c5-f6856c8c245f"),
                             Name = "NormalUser",
                             NormalizedName = "NORMALUSER"
                         });
@@ -175,22 +175,41 @@ namespace DataAccessLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("13ef20be-e9b5-4049-86e0-821d3a903c3b"),
+                            Id = new Guid("39996e5a-7ffe-4fa6-aa92-2f517b6c82f0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8438e81-d97b-46f6-82c4-2547971f44b6",
-                            Email = "admin@example.com",
+                            ConcurrencyStamp = "9cdf9f61-4991-4dfd-a377-c028333c4ad1",
+                            Email = "trkhamarat@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Tarik",
                             LastName = "Hamarat",
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                            NormalizedEmail = "TRKHAMARAT@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBllJVgafg0lJ5wCNe4gmec1UJkg7xq04qlrorI3Lg5/7D1PAz8WoyVbqBaL11ok2w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN9AASxu5vU7+tEr43FhQkG+NgHZMA9gGdFPGp1DzurVuJ3mgd2Uc7kVLfRNuTW/4A==",
                             PhoneNumber = "553 769 63 62",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("0e7e8fb8-128a-4899-a03c-d4209158d21b"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "57c663de-98fa-4487-9c1d-d8861fd58bc6",
+                            Email = "user@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Normal",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@EXAMPLE.COM",
+                            NormalizedUserName = "NORMALUSER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDYr6A2LlQnOC2yy72IpmrPB6QR4qMYtvsQVHxRIaqvWKgtnh0h60aEMCiN2ecO6HA==",
+                            PhoneNumber = "555 555 55 55",
+                            PhoneNumberConfirmed = false,
+                            Status = true,
+                            TwoFactorEnabled = false,
+                            UserName = "normaluser"
                         });
                 });
 
@@ -300,6 +319,18 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("39996e5a-7ffe-4fa6-aa92-2f517b6c82f0"),
+                            RoleId = new Guid("78b07f9f-fce4-4c7f-b8e7-9f0e7449d446")
+                        },
+                        new
+                        {
+                            UserId = new Guid("0e7e8fb8-128a-4899-a03c-d4209158d21b"),
+                            RoleId = new Guid("8b5bbf89-83de-450c-84c5-f6856c8c245f")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

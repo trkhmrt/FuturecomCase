@@ -26,3 +26,4 @@
 /Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/bin/Debug/net7.0/EntityLayer.dll
 /Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/bin/Debug/net7.0/EntityLayer.pdb
 /Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/obj/Debug/net7.0/DtoLayer.csproj.CopyComplete
+/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/obj/Debug/net7.0/DtoLayer.sourcelink.json

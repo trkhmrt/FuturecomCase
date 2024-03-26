@@ -27,12 +27,17 @@ namespace BusinessLayer.Concrete
 
         public List<UserLog> TGetList()
         {
-            throw new NotImplementedException();
+            return _logDal.GetList();
         }
 
         public void TInsert(UserLog t)
         {
-            throw new NotImplementedException();
+                _logDal.Insert(t);
+        }
+
+        public void TInsert(string type, string userId)
+        {
+            _logDal.TInsert(type,userId);
         }
 
         public void TUpdate(UserLog t)

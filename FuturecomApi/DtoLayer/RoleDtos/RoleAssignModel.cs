@@ -5,10 +5,14 @@ namespace DtoLayer.RoleDtos
 	{
 
 
-            public string Id { get; set; }
+        public RoleAssignModel()
+        {
+            Roles = new List<RoleUpdateDto>();
+        }
 
-            public List<RoleUpdateDto> Roles { get; set; }
-        
+        public string userId { get; set; }
+
+        public List<RoleUpdateDto> Roles { get; set; }
 
 
     }

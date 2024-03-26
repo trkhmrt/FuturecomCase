@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Concrete;
@@ -31,7 +32,7 @@ namespace FuturecomApi.Controllers
 
 
         // GET api/values/5
-        [HttpGet("{rolename}")]
+        [HttpGet("addrole/{rolename}")]
         public async Task<IActionResult> AddRole(string rolename)
         {
             if (rolename != null)
@@ -42,6 +43,7 @@ namespace FuturecomApi.Controllers
                 role.Id = Guid.NewGuid();
 
                 context.Roles.Add(role);
+                context.SaveChanges();
                 return Ok();
             }
 
@@ -70,7 +72,7 @@ namespace FuturecomApi.Controllers
         public async Task<IActionResult> GetAllRoles()
         {
 
-            var roles = _roleManager.Roles.ToList();
+            var roles =  _roleManager.Roles.ToList();
 
             return Ok(roles);
 
@@ -80,14 +82,15 @@ namespace FuturecomApi.Controllers
 
 
         [HttpGet("getuserrole/{userId}")]
+
         public async Task<IActionResult> GetUserRole(string userId)
         {
+            
             var user = _userManager.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
             if (user != null)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
-                Console.WriteLine(userRoles.GetType().Name);
-                Console.WriteLine(userRoles);
+                
                 foreach (var item in userRoles)
                 {
                     Console.WriteLine(item);
@@ -98,9 +101,9 @@ namespace FuturecomApi.Controllers
             {
                 return NotFound("User Not found");
             }
+            
 
-
-
+       
 
         }
 
@@ -109,13 +112,41 @@ namespace FuturecomApi.Controllers
         [Route("updaterole")]
         public async Task<IActionResult> UpdateRole([FromBody] RoleAssignModel model)
         {
+            
+            var user = await _userManager.FindByIdAsync(model.userId);
+
+            var roller = await _userManager.GetRolesAsync(user);
+
+            List<Role> newRoles = new List<Role>();
+
+            foreach (var item in model.Roles)
+            {
+                Role role = new Role
+                {
+                    Id = item.RoleID,
+                    Name = item.Name,
+                    NormalizedName = item.Name.ToUpper()
+                };
+
+                newRoles.Add(role);
+            }
+
+            var roleNames = newRoles.Select(r => r.Name).ToList();
 
 
-
+            await _userManager.RemoveFromRolesAsync(user, roller);
+            await _userManager.AddToRolesAsync(user, roleNames);
 
 
             return Ok();
 
+
+           
+
+       
+
+          
+  
         }
 
     }
