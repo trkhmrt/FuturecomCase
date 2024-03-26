@@ -7,16 +7,16 @@ using System.Net.NetworkInformation;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Abstract.IGenericUserServices;
 using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.TokenManager;
 using DtoLayer.UserDtos;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 
 
@@ -30,18 +30,18 @@ namespace FuturecomApi.Controllers
     public class UserController : Controller
     {
         public readonly UserManager<User> _userManager;
-        public readonly RoleManager<IdentityRole> _roleManager;
-        UserManagement userManagement = new UserManagement(new EfUserRepository());
-        LogManager logManager = new LogManager(new EfLogRepository());
+        public readonly RoleManager<Role> _roleManager;
+        Context context = new Context();
+       
 
         
 
 
-        public UserController(UserManager<User> userManager,RoleManager<IdentityRole> roleManager)
+        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-           
+         
         }
 
 
@@ -49,21 +49,20 @@ namespace FuturecomApi.Controllers
 
 
         [HttpGet("listuser")]
-  
+    
         public async Task<IActionResult> ListUser()
         {
-            
-            var users = userManagement.GetAllUser();
-                
-            return Ok(users);
-          
 
+
+            var users = context.Users.ToList();
+
+
+            return Ok(users);
         }
 
 
 
-        [HttpGet]
-        [Route("{userId}")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserById(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -74,39 +73,42 @@ namespace FuturecomApi.Controllers
                 return NotFound();
             }
 
-            return Ok(new {User=user});
+            return Ok(user);
         }
 
 
 
 
         [HttpPost("adduser")]
-       
-        public async Task<IActionResult> AddUser([FromBody] UserRegisterDto user)
+        public async Task<IActionResult> AddUser(UserRegisterDto user)
         {
 
-           
-                var Iduser = userManagement.UserAdd(user);
-                var result = await _userManager.CreateAsync(Iduser, user.Password);
+            User newUser = new User
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email,
+                UserName = user.UserName,
 
-                if (result.Succeeded)
+            };
+
+            var createResult = await _userManager.CreateAsync(newUser, user.Password);
+
+            if (createResult.Succeeded)
+            {
+                var roleAssign = await _userManager.AddToRoleAsync(newUser, "NormalUser");
+
+                if (roleAssign.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(Iduser, user.Role);
-
-                   var userid = await _userManager.GetUserIdAsync(Iduser);
-
-                    logManager.LogAdd(userid,"AU");
-
-                    return Ok("User Add");
+                    return Ok("User add!");
                 }
-                else
-                {
-                    return BadRequest(new {message="Bilgileri gözden geçirin"});
-                }
-
+            }
             
 
-          
+
+
+                return BadRequest("There is problem!");                   
 
         }
 
@@ -137,7 +139,7 @@ namespace FuturecomApi.Controllers
                 {
 
 
-                    logManager.LogAdd(request.Id, "CP");
+                  //  logManager.LogAdd(request.Id, "CP");
 
                     return Ok("Password changed successfully");
 
@@ -189,7 +191,7 @@ namespace FuturecomApi.Controllers
 
             if (result.Succeeded)
             {
-                logManager.LogAdd(userId, "IU");
+              //  logManager.LogAdd(userId, "IU");
                 
                 return Ok();
             }
@@ -224,7 +226,7 @@ namespace FuturecomApi.Controllers
 
             if (result.Succeeded)
             {
-                logManager.LogAdd(userId, "IU");
+               // logManager.LogAdd(userId, "IU");
                 return Ok();
             }
             else
@@ -264,17 +266,21 @@ namespace FuturecomApi.Controllers
         [HttpDelete("delete/{userId}")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
-            try
-            {
-                userManagement.UserDelete(userId);
+            
+                var foundUser = await _userManager.FindByIdAsync(userId);
 
-                logManager.LogAdd(userId, "UD");
-                return Ok();
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                if(foundUser!=null)
+                {
+                    await _userManager.DeleteAsync(foundUser);
+                   
+                }
+                
+                // logManager.LogAdd(userId, "UD");
+               
+            
+           
+            return Ok();
+
         }
 
 

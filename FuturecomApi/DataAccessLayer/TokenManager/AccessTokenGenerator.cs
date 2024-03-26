@@ -22,10 +22,15 @@ namespace DataAccessLayer.TokenManager
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claimDizisi = new[]
             {
-                new Claim("id",user.Id.ToString()),
+                new Claim("id",user.Id.ToString()),             
                 new Claim("role",role),
                 new Claim("name",user.FirstName),
-                new Claim("lastname",user.LastName)
+                new Claim("lastname",user.LastName),
+                new Claim("role",role),
+                new Claim("email",user.Email),
+                new Claim("phone",user.PhoneNumber),
+                new Claim("username",user.UserName)
+
 
             };
 
@@ -36,6 +41,8 @@ namespace DataAccessLayer.TokenManager
 
                 expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: credentials
+                
+                
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(token);

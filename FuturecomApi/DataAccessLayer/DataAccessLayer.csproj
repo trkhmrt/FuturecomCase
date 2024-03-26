@@ -11,18 +11,14 @@
     <None Remove="TokenManager\" />
     <None Remove="Repositories\" />
     <None Remove="Abstract\" />
-    <None Remove="EntityFramework\" />
-    <None Remove="Abstract\IGenericLog\" />
-    <None Remove="Abstract\IGenericUser\" />
+    <None Remove="EfRepositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Concrete\" />
     <Folder Include="TokenManager\" />
     <Folder Include="Repositories\" />
     <Folder Include="Abstract\" />
-    <Folder Include="EntityFramework\" />
-    <Folder Include="Abstract\IGenericLog\" />
-    <Folder Include="Abstract\IGenericUser\" />
+    <Folder Include="EfRepositories\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
@@ -38,6 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />

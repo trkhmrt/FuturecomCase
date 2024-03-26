@@ -20,18 +20,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Abstract\" />
     <None Remove="Concrete\" />
-    <None Remove="Abstract\IGenericLogServices\" />
-    <None Remove="Abstract\IGenericUserServices\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
     <Folder Include="Concrete\" />
-    <Folder Include="Abstract\IGenericLogServices\" />
-    <Folder Include="Abstract\IGenericUserServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />

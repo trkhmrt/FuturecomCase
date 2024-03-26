@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj": {}
+    "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj": {}
   },
   "projects": {
-    "/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj": {
+    "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj",
+        "projectUniqueName": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj",
+        "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DataAccessLayer/DataAccessLayer.csproj",
         "packagesPath": "/Users/tarikhamarat/.nuget/packages/",
-        "outputPath": "/Users/tarikhamarat/Desktop/FuturecomApi/DataAccessLayer/obj/",
+        "outputPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DataAccessLayer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/tarikhamarat/.nuget/NuGet/NuGet.Config"
@@ -27,11 +27,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/DtoLayer.csproj": {
-                "projectPath": "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/DtoLayer.csproj"
+              "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/DtoLayer.csproj": {
+                "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/DtoLayer.csproj"
               },
-              "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/EntityLayer.csproj": {
-                "projectPath": "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/EntityLayer.csproj"
+              "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj": {
+                "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj"
               }
             }
           }
@@ -46,6 +46,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.16, )"
@@ -95,18 +99,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/DtoLayer.csproj": {
+    "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/DtoLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/DtoLayer.csproj",
+        "projectUniqueName": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/DtoLayer.csproj",
         "projectName": "DtoLayer",
-        "projectPath": "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/DtoLayer.csproj",
+        "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/DtoLayer.csproj",
         "packagesPath": "/Users/tarikhamarat/.nuget/packages/",
-        "outputPath": "/Users/tarikhamarat/Desktop/FuturecomApi/DtoLayer/obj/",
+        "outputPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/DtoLayer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/tarikhamarat/.nuget/NuGet/NuGet.Config"
@@ -121,7 +125,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj": {
+                "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -134,6 +142,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.16, )"
@@ -155,18 +167,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/EntityLayer.csproj": {
+    "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/EntityLayer.csproj",
+        "projectUniqueName": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj",
         "projectName": "EntityLayer",
-        "projectPath": "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/EntityLayer.csproj",
+        "projectPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/EntityLayer.csproj",
         "packagesPath": "/Users/tarikhamarat/.nuget/packages/",
-        "outputPath": "/Users/tarikhamarat/Desktop/FuturecomApi/EntityLayer/obj/",
+        "outputPath": "/Users/tarikhamarat/Documents/GitHub/FuturecomCase/FuturecomApi/EntityLayer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/tarikhamarat/.nuget/NuGet/NuGet.Config"
@@ -194,6 +206,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.16, )"
@@ -243,7 +259,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
         }
       }
     }

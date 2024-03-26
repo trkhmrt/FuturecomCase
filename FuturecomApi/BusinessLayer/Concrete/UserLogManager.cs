@@ -2,29 +2,62 @@
 using BusinessLayer.Abstract.IGenericLogServices;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
-using EntityLayer.Concrete.Logs;
+using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class LogManager : ILogService
+    public class UserLogManager : IUserLogService
     {
-        ILogDal _logDal;
+        IUserLogDal _logDal;
 
-        public LogManager(ILogDal logDal)
+        public UserLogManager(IUserLogDal logDal)
         {
             _logDal = logDal;
         }
 
-
-      
-     
-
-        public ICollection<UserLog> GetAllLog()
+        public void TDelete(UserLog t)
         {
-           return _logDal.GetAllLog();
+            throw new NotImplementedException();
+        }
+
+        public UserLog TGetByID(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UserLog> TGetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TInsert(UserLog t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(UserLog t)
+        {
+            throw new NotImplementedException();
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         public bool LogAdd(string id,string request)
         {
             try
@@ -53,8 +86,8 @@ namespace BusinessLayer.Concrete
             return true;
 
         }
+        */
 
-      
     }
 }
 

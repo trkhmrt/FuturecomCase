@@ -3,7 +3,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract.IGenericUserServices
 {
-	public interface IUserService:IGenericUserService<User>
+	public interface IUserService:IGenericService<User>
 	{
 
 	}

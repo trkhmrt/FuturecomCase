@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Text.Json;
+using Azure.Core;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.TokenManager;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +15,12 @@ namespace FuturecomApi.Middlewares
 
 
 
-        private readonly ILogger<GlobalExceptionHandlingMiddleware> _logger;
+     
         private readonly Context _context;
 
-		public GlobalExceptionHandlingMiddleware(ILogger<GlobalExceptionHandlingMiddleware> logger,Context context)
+		public GlobalExceptionHandlingMiddleware(Context context)
         {
-            _logger = logger;
+          
             _context=context;
 
         }
@@ -32,9 +34,13 @@ namespace FuturecomApi.Middlewares
             try
             {
 
+               
 
                 await next(context);
-               
+
+
+                   
+
 
             }
           

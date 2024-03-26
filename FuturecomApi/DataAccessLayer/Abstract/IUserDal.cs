@@ -4,7 +4,7 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract.IGenericUser
 {
-	public interface IUserDal:IGenericUserDal<User>
+	public interface IUserDal:IGenericDal<User>
 	{
 
 	}

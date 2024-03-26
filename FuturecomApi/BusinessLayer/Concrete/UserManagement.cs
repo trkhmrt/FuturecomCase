@@ -17,58 +17,30 @@ namespace BusinessLayer.Concrete
             _userDal = userDal;
         }
 
-
-        public User FindUserByUsername(string username)
+        public void TDelete(User t)
         {
-            return _userDal.FindUserByUsername(username);
+            throw new NotImplementedException();
         }
 
-        public ICollection<User> GetAllUser()
+        public User TGetByID(Guid id)
         {
-            return _userDal.GetAllUser();
+            throw new NotImplementedException();
         }
 
-        public string GetRoleByUsername(string username)
+        public List<User> TGetList()
         {
-            
-           return _userDal.GetRoleByUsername(username);
+            throw new NotImplementedException();
         }
 
-        public User GetUserById(string userId)
+        public void TInsert(User t)
         {
-            return _userDal.GetUserById(userId);
+            throw new NotImplementedException();
         }
 
-        public User UserAdd(UserRegisterDto user)
+        public void TUpdate(User t)
         {
-            var IdentityUser = new User
-            {
-                UserName=user.UserName,
-                FirstName=user.FirstName,
-                LastName=user.LastName,
-                PhoneNumber=user.PhoneNumber,
-                Email=user.Email,
-                Status=true
-            };
-
-            return IdentityUser;
-             
+            throw new NotImplementedException();
         }
-
-        public void UserDelete(string userId)
-        {
-            _userDal.UserDelete(userId);
-        }
-
-        public void UserUpdate(UserUpdateDto user)
-        {
-            
-                _userDal.UserUpdate(user);
-            
-            
-        }
-
-       
     }
 }
 

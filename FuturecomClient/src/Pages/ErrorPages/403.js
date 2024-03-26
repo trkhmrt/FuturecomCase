@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import unauthorize from './notfound.json'
+import unauthorize from './unauthorize.json'
 import {useNavigate,useParams} from "react-router-dom";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 

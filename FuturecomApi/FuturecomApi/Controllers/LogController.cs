@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
-using EntityLayer.Concrete.Logs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,16 +14,15 @@ namespace FuturecomApi.Controllers
     public class LogController : Controller
     {
 
-        LogManager logManager = new LogManager(new EfLogRepository());
+        //LogManager logManager = new LogManager(new EfLogRepository());
 
       
-        [HttpGet]
-
-        public async Task<IActionResult> Get()
+        [HttpGet("getlogs")]
+        public async Task<IActionResult> GetLogs()
         {
-            var logs = logManager.GetAllLog();
+            
 
-            return Ok(logs);
+            return Ok();
         }
 
       

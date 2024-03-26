@@ -1,18 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EntityLayer.Concrete.Logs
+namespace EntityLayer.Concrete
 {
-	public class UserLog
-	{
+    public class UserLog
+    {
 
-        public int UserLogID { get; set; }
+        public Guid UserLogID { get; set; }
 
         [ForeignKey(name: "User")]
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         public User? User { get; set; }
 
+        [StringLength(2)]
         public string Type { get; set; }
 
         public DateTime CreatedDate { get; set; }
